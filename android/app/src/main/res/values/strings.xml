@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Lokmart</string>
+    <string name="server_client_id">625967762187-89g50n94paickqdk6oi5rsq8vsmdhvo3.apps.googleusercontent.com</string>
+    <string name="facebook_app_id">6452042264824519</string>
+    <string name="facebook_client_token">54610ae48a03078f2ceba179c30843ed</string>
+
+</resources>

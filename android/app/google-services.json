@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "625967762187",
+    "project_id": "lokmart",
+    "storage_bucket": "lokmart.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:625967762187:android:9b6c701544f71d281eb00e",
+        "android_client_info": {
+          "package_name": "com.lokmart"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "625967762187-0due807uq1bukin63ukal0vt49s5ol23.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.lokmart",
+            "certificate_hash": "46a4c850e075896c08dd6cd848ff0fe9e4bd821a"
+          }
+        },
+        {
+          "client_id": "625967762187-89g50n94paickqdk6oi5rsq8vsmdhvo3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAyj_aSJhqR_N3kVkjfpIWy8u2z1O66y9g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "625967762187-89g50n94paickqdk6oi5rsq8vsmdhvo3.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "625967762187-rrid1u5qfc85k49n3lq265bujm3dbli3.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.reactjs.native.example.Lokmart"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
