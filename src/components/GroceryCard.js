@@ -32,7 +32,7 @@ const FavoriteIcon=({isFav,onPress})=>{
 const GroceryCard = (props) => {
   // let item=props.item
   const [error, seterror] = useState(false)
-  const [item, setitem] = useState(props.item);
+  // const [item, setitem] = useState(props.item);
   
   // useEffect(() => {
   //   setisFav(item.isFavorite);
