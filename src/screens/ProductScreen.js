@@ -178,16 +178,9 @@ const ProductScreen = props => {
       //   console.log(txt);
       // }
       // setskip(10)
-
-      //   console.log('searchlist hook : ',searchedList)
-      //   console.log('state searchlist : ', searchedProducts.products);
-      // setsearchedList(searchedProducts.products);
-      // console.log('useEffect searchlist : ',searchedList)
-      //   console.log('after set searchlist hook : ', searchedList);
     },
     [
       // txt,
-      // searchedProducts.products,
     ],
   );
 
@@ -270,11 +263,6 @@ const ProductScreen = props => {
             }}
           />
         </View>
-        {/* <Text>
-          {searchedProducts.products.length !== 0
-            ? searchedProducts.products[0]?.title
-            : products.products[0].title}
-        </Text> */}
         {
           // productList.length !==0 ? (
           isLoading ? (
@@ -308,20 +296,11 @@ const ProductScreen = props => {
               refreshing={true}
               showsVerticalScrollIndicator={false}
               style={{marginHorizontal: 20}}
-              // data={
-              //   searchedProducts.products.length === 0
-              //     ? products.products
-              //     : searchedProducts.products
-              // }
               data={
                 searchedProducts.products.length !== 0
                   ? searchedProducts.products
                   : products.products
               }
-              // data={searchedProducts.products}
-              // data={
-              //   searchedList.length !== 0 ? searchedList : products.products
-              // }
               extraData={searchedProducts.products}
               keyExtractor={(item, index) => item + index}
               renderItem={({item, index}) => {
