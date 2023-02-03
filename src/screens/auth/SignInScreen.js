@@ -126,7 +126,7 @@ const SignInScreen = ({navigation}) => {
     try {
       await GoogleSignin.hasPlayServices();
       const userInfo = await GoogleSignin.signIn();
-      console.log(userInfo.idToken);
+      console.log(userInfo);
       await AsyncStorage.setItem('USER', JSON.stringify(userInfo.user));
       // setuser(userInfo)
 
@@ -154,8 +154,8 @@ const SignInScreen = ({navigation}) => {
     }
   };
 
-  const signInFB = async () => {
-    LoginManager.logInWithPermissions(['public_profile']).then(
+  const signInFB =  () => {
+    LoginManager.logInWithPermissions(['public_profile','email']).then(
       function (result) {
         if (result.isCancelled) {
           console.log('Login cancelled');
@@ -164,16 +164,24 @@ const SignInScreen = ({navigation}) => {
             'Login success with permissions: ' +
               result.grantedPermissions.toString(),
           );
-          const currentProfile = Profile.getCurrentProfile().then(function (
+          const currentProfile = Profile.getCurrentProfile().then(async function (
             currentProfile,
           ) {
             console.log('Current User :: ',currentProfile)
             if (currentProfile) {
-              console.log(
-                'The current logged user is: ' +
-                  currentProfile.name 
-              );
+
+              console.log('The current logged user is: ' + currentProfile.name);
               AsyncStorage.setItem('USER', JSON.stringify(currentProfile));
+
+              // Once signed in, get the users AccesToken
+              const data = await AccessToken.getCurrentAccessToken();
+              console.log("data:,",data)
+              // Create a Firebase credential with the AccessToken
+              const facebookCredential = auth.FacebookAuthProvider.credential(
+                data.accessToken,
+              );
+              // Sign-in the user with the credential
+              auth().signInWithCredential(facebookCredential);
               navigation.replace(ScreenNames.HomeTab, {
                 user: currentProfile.name,
               });
@@ -186,6 +194,8 @@ const SignInScreen = ({navigation}) => {
       },
     );
   };
+
+  
 
   // const isSignedIn=async()=>{
   //   const isSignIn=await GoogleSignin.isSignedIn();
@@ -271,13 +281,16 @@ const SignInScreen = ({navigation}) => {
             </Text>
             <View style={{height: 20}} />
             <CustomInput
+              placeholder={'Enter username / e-mail address'}
               value={username}
               prefix={'user'}
               onChangeText={txt => {
                 setusername(txt);
               }}
             />
+
             <CustomInput
+              placeholder={'Enter password'}
               value={password}
               prefix={'lock'}
               passwordField={true}
@@ -351,12 +364,30 @@ const SignInScreen = ({navigation}) => {
                 }
               }}
             /> */}
-            <Text style={{alignSelf: 'center', ...fonts.h6}}>OR</Text>
+            <Text style={{alignSelf: 'center', ...fonts.h6, marginVertical: 2}}>
+              OR
+            </Text>
+            <Text
+              style={{
+                alignSelf: 'center',
+                ...fonts.h6,
+                color: colors.soft_grey,
+                marginVertical: 2,
+              }}>
+              Signin with{' '}
+              <Text
+                style={{...fonts.h7, color: colors.primary_color}}
+                onPress={() => {
+                  navigation.navigate(ScreenNames.PhoneNumSignInScreen);
+                }}>
+                Phone Number
+              </Text>
+            </Text>
             <View
               style={{
                 flexDirection: 'row',
                 justifyContent: 'space-around',
-                marginVertical: 5,
+                marginVertical: 2,
               }}>
               <TouchableWithoutFeedback onPress={signIn}>
                 <Image
@@ -364,8 +395,8 @@ const SignInScreen = ({navigation}) => {
                     uri: 'https://www.freepnglogos.com/uploads/google-logo-png/google-logo-png-suite-everything-you-need-know-about-google-newest-0.png',
                   }}
                   style={{
-                    height: 40,
-                    width: 40,
+                    height: 35,
+                    width: 35,
                     resizeMode: 'cover',
                     borderRadius: 50,
                   }}
@@ -377,8 +408,8 @@ const SignInScreen = ({navigation}) => {
                     uri: 'https://cdn-icons-png.flaticon.com/512/124/124010.png',
                   }}
                   style={{
-                    height: 40,
-                    width: 40,
+                    height: 35,
+                    width: 35,
                     resizeMode: 'cover',
                     borderRadius: 50,
                   }}
@@ -391,8 +422,8 @@ const SignInScreen = ({navigation}) => {
                       uri: 'https://1000logos.net/wp-content/uploads/2016/10/Apple-Logo.png',
                     }}
                     style={{
-                      height: 40,
-                      width: 40,
+                      height: 35,
+                      width: 35,
                       resizeMode: 'cover',
                       borderRadius: 50,
                     }}
@@ -465,11 +496,7 @@ const SignInScreen = ({navigation}) => {
               Don’t have an account? {''}
               <Text
                 onPress={() => {
-                  navigation.navigate(ScreenNames.SignupScreen, {
-                    onBack: data => {
-                      setuserList([...userList, data]);
-                    },
-                  });
+                  navigation.navigate(ScreenNames.SignupScreen, );
                 }}
                 style={{
                   fontFamily: 'Poppins-Regular',

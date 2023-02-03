@@ -12,6 +12,8 @@ import {colors} from '../../styles/colors';
 import {fonts} from '../../styles/fonts';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+import auth from '@react-native-firebase/auth';
+
 
 const SignUpScreen = ({navigation,route}) => {
   const [usernameError, setusernameError] = useState('');
@@ -41,6 +43,35 @@ const SignUpScreen = ({navigation,route}) => {
       setpassword('');
     };
   }, []);
+
+
+  const createAndSignIn=async(email,password)=>{
+    try {
+      const res=await auth().createUserWithEmailAndPassword(email,password)
+      // .then(user=>{
+      //   return user
+      //   .user.updateProfile({
+      //     displayName:username
+      //   })
+        
+      // });
+      console.log('create User With Email And Password : ',res)
+      console.log('Response : ',res.user)
+      
+      await AsyncStorage.setItem('USER', JSON.stringify(res.user));
+       navigation.replace(ScreenNames.HomeTab, {
+         user: res.user.displayName,
+       });
+    } catch (error) {
+      console.log(error.userInfo.message);
+      if (error.userInfo.message){
+
+        Alert.alert('Sign Up', error.userInfo.message);
+      }else{
+        Alert.alert('Sign Up', 'Something went wrong !');
+      }
+    }
+  }
 
   return (
     <KeyboardAwareScrollView scrollEnabled={false} enableOnAndroid={true}>
@@ -81,6 +112,7 @@ const SignUpScreen = ({navigation,route}) => {
             <Text style={fonts.h3}>Create your account</Text>
             <View style={{height: 20}} />
             <CustomInput
+              placeholder={'Enter username'}
               value={username}
               prefix={'user'}
               onChangeText={txt => {
@@ -94,6 +126,7 @@ const SignUpScreen = ({navigation,route}) => {
               <Text style={styles.errorTxt}>{usernameError}</Text>
             )}
             <CustomInput
+              placeholder={'Enter e-mail address'}
               keyboardType={'email-address'}
               value={email}
               prefix={'envelope'}
@@ -106,6 +139,7 @@ const SignUpScreen = ({navigation,route}) => {
             />
             {emailError && <Text style={styles.errorTxt}>{emailError}</Text>}
             <CustomInput
+              placeholder={'Enter password'}
               value={password}
               prefix={'lock'}
               passwordField={true}
@@ -122,7 +156,7 @@ const SignUpScreen = ({navigation,route}) => {
             <View style={{height: 20}} />
             <CustomButton
               title={'REGISTER'}
-              onPress={ async() => {
+              onPress={async () => {
                 if (
                   username.trim().length == 0 ||
                   password.trim().length == 0 ||
@@ -156,21 +190,18 @@ const SignUpScreen = ({navigation,route}) => {
                   Alert.alert('Sign Up', 'Please Accept Term and Condition !');
                 } else {
                   console.log('done');
-                  // route.params.onBack({
-                  //   username:username,
-                  //   email:email,
-                  //   password:password
-                  // })
-                  const temp = [
-                    ...userList,
-                    {
-                      username: username,
-                      email: email,
-                      password: password,
-                    },
-                  ];
-                  await AsyncStorage.setItem('USERLIST',JSON.stringify(temp))
-                  navigation.goBack();
+
+                  // const temp = [
+                  //   ...userList,
+                  //   {
+                  //     username: username,
+                  //     email: email,
+                  //     password: password,
+                  //   },
+                  // ];
+                  // await AsyncStorage.setItem('USERLIST', JSON.stringify(temp));
+                  // navigation.goBack();
+                  createAndSignIn(email,password)
                 }
               }}
             />

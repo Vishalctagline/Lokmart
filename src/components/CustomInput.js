@@ -42,7 +42,7 @@ const CustomInput = (props) => {
           marginHorizontal: 10,
           textAlign: 'left',
           lineHeight: 24,
-        }}
+        }}    
         secureTextEntry={props.passwordField && !visibility}
         value={props.value}
         onChangeText={props.onChangeText}

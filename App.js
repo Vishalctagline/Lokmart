@@ -26,6 +26,7 @@ import {ScreenNames} from './src/navigation/ScreenNames';
 import {GoogleSignin} from '@react-native-community/google-signin';
 import { Provider } from 'react-redux';
 import { store } from './src/redux/store/store';
+import PhoneNumSignInScreen from './src/screens/PhoneNumSignInScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -94,7 +95,11 @@ const App = () => {
 
     let user = JSON.parse(await AsyncStorage.getItem('USER'));
     // console.log('async get item : ', user);
-    setusername(user.name ? user.name : user.username);
+    if(user==null){
+      await AsyncStorage.setItem('USER', JSON.stringify({name: 'logout'}));
+      user = JSON.parse(await AsyncStorage.getItem('USER'));
+    }
+    setusername(user?.name ? user?.name : user?.username);
 
     isSignedIn();
 
@@ -117,7 +122,7 @@ const App = () => {
       await AsyncStorage.setItem('USER', JSON.stringify(userInfo.user));
       // console.log(userInfo.user.name);
     } catch (error) {
-      // console.log('getCurrentUserInfo ERROR : ',error.code);
+      console.log('getCurrentUserInfo ERROR : ',error.code);
       // getUser();
     }
   };
@@ -185,6 +190,10 @@ const App = () => {
             <Stack.Screen
               name={ScreenNames.AddNewCardScreen}
               component={AddNewCardScreen}
+            />
+            <Stack.Screen
+              name={ScreenNames.PhoneNumSignInScreen}
+              component={PhoneNumSignInScreen}
             />
           </Stack.Navigator>
         </NavigationContainer>
