@@ -3,12 +3,10 @@ import {Alert} from 'react-native';
 
 const lists = {
   productList: {
-    // total: 0,
     products: [],
     skip: 0,
   },
-  searchList: {
-    // total: 0,
+  searchList: {    
     products: [],
     skip: 0,
   },
@@ -77,20 +75,7 @@ export const getSearchedProducts = createAsyncThunk(
 
 const productSlice = createSlice({
   name: 'products',
-  initialState: {
-    productList: {
-      // total: 0,
-      products: [],
-      skip: 0,
-    },
-    searchList: {
-      // total: 0,
-      products: [],
-      skip: 0,
-    },
-    total: 0,
-    isLoading: true,
-  },
+  initialState: lists,
   reducers: {
     loader: (state, action) => {
       state.isLoading = true;
@@ -148,22 +133,11 @@ const productSlice = createSlice({
       }),
       builder.addCase(getSearchedProducts.fulfilled, (state, action) => {
         if (action.payload) {
-          // return Object.assign({}, state, {
-          //   ...state,
-          //   searchList: {
-          //     // total: action.payload.total,
-          //     products: action.payload.products,
-          //     skip: action.payload.skip,
-          //   },
-          //   total: action.payload.total,
-          //   isLoading: false,
-          // });
           console.log({state: state.searchList});
           console.log({action});
           state = {
             ...state,
             searchList: {
-              // total: action.payload.total,
               products: action.payload.products,
               skip: action.payload.skip,
             },
@@ -171,7 +145,6 @@ const productSlice = createSlice({
             isLoading: false,
           };
           // state.searchList = {
-          //   // total: action.payload.total,
           //   products: action.payload.products,
           //   skip: action.payload.skip,
           // };
@@ -179,8 +152,8 @@ const productSlice = createSlice({
         // state.total = action.payload.total;
         // state.isLoading = false;
 
-        console.log('State : ', state);
-        //
+        // console.log('State : ', state);
+        
         return state;
       });
   },

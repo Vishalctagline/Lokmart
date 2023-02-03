@@ -14,7 +14,7 @@ import GroceryCard from '../components/GroceryCard';
 import SearchBar from '../components/SearchBar';
 import CustomHeader from '../components/CustomHeader';
 import {fonts} from '../styles/fonts';
-import {connect, useDispatch, useSelector} from 'react-redux';
+import { useDispatch, useSelector} from 'react-redux';
 import {
   emptySearchList,
   getInitProducts,
@@ -357,11 +357,5 @@ const ProductScreen = props => {
   );
 };
 
-// function mapStateToProps(state) {
-//   console.log('mapStateToProps : ', state);
-//   return {searchList:state.products.searchList};
-// }
-
-// export default connect(mapStateToProps)(ProductScreen)
 
 export default ProductScreen;
