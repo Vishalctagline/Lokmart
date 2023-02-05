@@ -12,6 +12,7 @@ import {fonts} from '../styles/fonts';
 
 import auth from '@react-native-firebase/auth';
 import {ScreenNames} from '../navigation/ScreenNames';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const PhoneNumSignInScreen = ({navigation}) => {
   const [number, setnumber] = useState('');
@@ -36,8 +37,8 @@ const PhoneNumSignInScreen = ({navigation}) => {
     try {
       const res = await confirm.confirm(otp);
       console.log('otp result : ', res);
-      console.log(res.user);
-      //   AsyncStorage.setItem('USER', JSON.stringify());
+      console.log('USER : ',res.user);
+        AsyncStorage.setItem('USER', JSON.stringify(res.user));
       navigation.replace(ScreenNames.HomeTab, {user: res.user.phoneNumber});
     } catch (error) {
       console.log('ERROR : : ', {error});

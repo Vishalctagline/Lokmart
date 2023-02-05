@@ -3,7 +3,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {
   View,
-  StatusBar,  
+  StatusBar,
   StyleSheet,
   ActivityIndicator,
   Alert,
@@ -24,8 +24,8 @@ import AddNewCardScreen from './src/screens/AddNewCardScreen';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {ScreenNames} from './src/navigation/ScreenNames';
 import {GoogleSignin} from '@react-native-community/google-signin';
-import { Provider } from 'react-redux';
-import { store } from './src/redux/store/store';
+import {Provider} from 'react-redux';
+import {store} from './src/redux/store/store';
 import PhoneNumSignInScreen from './src/screens/PhoneNumSignInScreen';
 
 const Stack = createNativeStackNavigator();
@@ -53,7 +53,6 @@ const App = () => {
   //   setusername(user);
   //   console.log(username)
   // },[]);
-
 
   const getCartListOfuser = async id => {
     console.log('ID of User : ', id);
@@ -94,15 +93,22 @@ const App = () => {
     // }
 
     let user = JSON.parse(await AsyncStorage.getItem('USER'));
-    // console.log('async get item : ', user);
-    if(user==null){
+    console.log('async get item : ', user);
+    if (user == null) {
       await AsyncStorage.setItem('USER', JSON.stringify({name: 'logout'}));
       user = JSON.parse(await AsyncStorage.getItem('USER'));
     }
-    setusername(user?.name ? user?.name : user?.username);
+    if (user.name || user.username || user.phoneNumber) {
+      if (user.phoneNumber) {
+        setusername(user.phoneNumber);
+      } else {
+        setusername(user.name ? user.name : user.username);
+      }
+    } else {
+      setusername('User');
+    }
 
-    isSignedIn();
-
+    // isSignedIn();
   };
 
   const isSignedIn = async () => {
@@ -122,7 +128,7 @@ const App = () => {
       await AsyncStorage.setItem('USER', JSON.stringify(userInfo.user));
       // console.log(userInfo.user.name);
     } catch (error) {
-      console.log('getCurrentUserInfo ERROR : ',error.code);
+      console.log('getCurrentUserInfo ERROR : ', error.code);
       // getUser();
     }
   };

@@ -13,6 +13,7 @@ import {fonts} from '../../styles/fonts';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import auth from '@react-native-firebase/auth';
+import { ScreenNames } from '../../navigation/ScreenNames';
 
 
 const SignUpScreen = ({navigation,route}) => {
@@ -47,7 +48,7 @@ const SignUpScreen = ({navigation,route}) => {
 
   const createAndSignIn=async(email,password)=>{
     try {
-      const res=await auth().createUserWithEmailAndPassword(email,password)
+      const res= await auth().createUserWithEmailAndPassword(email,password)
       // .then(user=>{
       //   return user
       //   .user.updateProfile({
@@ -60,13 +61,13 @@ const SignUpScreen = ({navigation,route}) => {
       
       await AsyncStorage.setItem('USER', JSON.stringify(res.user));
        navigation.replace(ScreenNames.HomeTab, {
-         user: res.user.displayName,
+         user: res.user.displayName ? res.user.displayName : "User",
        });
     } catch (error) {
-      console.log(error.userInfo.message);
-      if (error.userInfo.message){
+      console.log(error.userInfo?.message);
+      if (error.userInfo?.message){
 
-        Alert.alert('Sign Up', error.userInfo.message);
+        Alert.alert('Sign Up', error.userInfo?.message);
       }else{
         Alert.alert('Sign Up', 'Something went wrong !');
       }

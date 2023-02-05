@@ -41,8 +41,6 @@ import {
 
 import auth from '@react-native-firebase/auth';
 
-
-
 const SignInScreen = ({navigation}) => {
   const [userList, setuserList] = useState([]);
 
@@ -106,15 +104,13 @@ const SignInScreen = ({navigation}) => {
     // getUserDetails();
     console.log('useEffect');
 
-    GoogleSignin.configure(
-      {
+    GoogleSignin.configure({
       webClientId:
         '625967762187-89g50n94paickqdk6oi5rsq8vsmdhvo3.apps.googleusercontent.com',
       iosClientId:
         '625967762187-rrid1u5qfc85k49n3lq265bujm3dbli3.apps.googleusercontent.com',
       // offlineAccess: true,
-    }
-    );
+    });
 
     return () => {
       setusername('');
@@ -136,7 +132,7 @@ const SignInScreen = ({navigation}) => {
       );
 
       // Sign-in the user with the credential
-       auth().signInWithCredential(googleCredential);
+      auth().signInWithCredential(googleCredential);
       navigation.replace(ScreenNames.HomeTab, {
         user: userInfo.user.name,
       });
@@ -154,8 +150,8 @@ const SignInScreen = ({navigation}) => {
     }
   };
 
-  const signInFB =  () => {
-    LoginManager.logInWithPermissions(['public_profile','email']).then(
+  const signInFB = () => {
+    LoginManager.logInWithPermissions(['public_profile', 'email']).then(
       function (result) {
         if (result.isCancelled) {
           console.log('Login cancelled');
@@ -164,29 +160,36 @@ const SignInScreen = ({navigation}) => {
             'Login success with permissions: ' +
               result.grantedPermissions.toString(),
           );
-          const currentProfile = Profile.getCurrentProfile().then(async function (
-            currentProfile,
-          ) {
-            console.log('Current User :: ',currentProfile)
-            if (currentProfile) {
+          const currentProfile = Profile.getCurrentProfile().then(
+            async function (currentProfile) {
+              console.log('Current User :: ', currentProfile);
+              if (currentProfile) {
+                console.log(
+                  'The current logged user is: ' + currentProfile.name,
+                );
+                AsyncStorage.setItem('USER', JSON.stringify(currentProfile));
 
-              console.log('The current logged user is: ' + currentProfile.name);
-              AsyncStorage.setItem('USER', JSON.stringify(currentProfile));
+                // Once signed in, get the users AccesToken
+                const data = await AccessToken.getCurrentAccessToken();
+                console.log('data:,', data);
+                // Create a Firebase credential with the AccessToken
+                const facebookCredential = auth.FacebookAuthProvider.credential(
+                  data.accessToken,
+                );
 
-              // Once signed in, get the users AccesToken
-              const data = await AccessToken.getCurrentAccessToken();
-              console.log("data:,",data)
-              // Create a Firebase credential with the AccessToken
-              const facebookCredential = auth.FacebookAuthProvider.credential(
-                data.accessToken,
-              );
-              // Sign-in the user with the credential
-              auth().signInWithCredential(facebookCredential);
-              navigation.replace(ScreenNames.HomeTab, {
-                user: currentProfile.name,
-              });
-            }
-          });
+
+                // Sign-in the user with the credential
+                auth()
+                  .signInWithCredential(facebookCredential)
+                  .then(
+                    navigation.replace(ScreenNames.HomeTab, {
+                      user: currentProfile.name,
+                    }),
+                  )
+                  .catch(e => Alert.alert('Sign In', e.toString()));
+              }
+            },
+          );
         }
       },
       function (error) {
@@ -194,8 +197,6 @@ const SignInScreen = ({navigation}) => {
       },
     );
   };
-
-  
 
   // const isSignedIn=async()=>{
   //   const isSignIn=await GoogleSignin.isSignedIn();
@@ -281,6 +282,7 @@ const SignInScreen = ({navigation}) => {
             </Text>
             <View style={{height: 20}} />
             <CustomInput
+              keyboardType={'email-address'}
               placeholder={'Enter username / e-mail address'}
               value={username}
               prefix={'user'}
@@ -496,7 +498,7 @@ const SignInScreen = ({navigation}) => {
               Don’t have an account? {''}
               <Text
                 onPress={() => {
-                  navigation.navigate(ScreenNames.SignupScreen, );
+                  navigation.navigate(ScreenNames.SignupScreen);
                 }}
                 style={{
                   fontFamily: 'Poppins-Regular',
