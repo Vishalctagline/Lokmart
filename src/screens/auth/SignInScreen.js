@@ -72,15 +72,42 @@ const SignInScreen = ({navigation}) => {
         navigation.replace(ScreenNames.HomeTab, {
           user: jsonData.username,
         });
-      } else {
-        Alert.alert('SignIn', jsonData.message);
-      }
+      } else if (response.status == 400) {
+        auth()
+          .signInWithEmailAndPassword(username, password)
+          .then(res => {
+            console.log('User : ',res)
+            setisLoading(false);
+            if(res.user.emailVerified){
+              navigation.replace(ScreenNames.HomeTab, {
+                user: res.user.displayName ? res.user.displayName : 'User',
+              });
+            }else{
+              Alert.alert('Sign In', "Please verify your Email.")
+            }
+          })
+          .catch(err => Alert.alert('Sign In', err.toString()));
+        }else{
+          Alert.alert('SignIn', jsonData.message);
+        }
     } catch (error) {
       setisLoading(false);
       console.log(error);
       const errorMsg = 'Something went wrong(' + error.toString() + ')';
       Alert.alert('SignIn', errorMsg);
     }
+    // try {
+    //   auth()
+    //     .signInWithEmailAndPassword(username, password)
+    //     .then(res => {
+    //       setisLoading(false);
+    //       navigation.replace(ScreenNames.HomeTab, {
+    //         user: res.user.displayName ? res.user.displayName : 'User',
+    //       });
+    //     });
+    // } catch (error) {
+    //   Alert.alert('Sign In', error.toString());
+    // }
   };
 
   // console.log('list',userList)
@@ -176,7 +203,6 @@ const SignInScreen = ({navigation}) => {
                 const facebookCredential = auth.FacebookAuthProvider.credential(
                   data.accessToken,
                 );
-
 
                 // Sign-in the user with the credential
                 auth()

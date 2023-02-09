@@ -13,10 +13,9 @@ import {fonts} from '../../styles/fonts';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import auth from '@react-native-firebase/auth';
-import { ScreenNames } from '../../navigation/ScreenNames';
+import {ScreenNames} from '../../navigation/ScreenNames';
 
-
-const SignUpScreen = ({navigation,route}) => {
+const SignUpScreen = ({navigation, route}) => {
   const [usernameError, setusernameError] = useState('');
   const [emailError, setemailError] = useState('');
   const [passwordError, setpasswordError] = useState('');
@@ -25,16 +24,15 @@ const SignUpScreen = ({navigation,route}) => {
   const [password, setpassword] = useState('');
   const [isChecked, setisChecked] = useState(false);
 
-  const [userList, setuserList] = useState([])
+  const [userList, setuserList] = useState([]);
 
-  const getUserList=async()=>{
-    const data=JSON.parse(await AsyncStorage.getItem('USERLIST'))
-    if(data==null){
-      data=[]
+  const getUserList = async () => {
+    const data = JSON.parse(await AsyncStorage.getItem('USERLIST'));
+    if (data == null) {
+      data = [];
     }
-    setuserList(data)
-  }
-
+    setuserList(data);
+  };
 
   useEffect(() => {
     getUserList();
@@ -45,34 +43,37 @@ const SignUpScreen = ({navigation,route}) => {
     };
   }, []);
 
-
-  const createAndSignIn=async(email,password)=>{
+  const createAndSignIn = async (email, password) => {
     try {
-      const res= await auth().createUserWithEmailAndPassword(email,password)
+      const res = await auth()
+        .createUserWithEmailAndPassword(email, password)
+        .then(res => {
+          res.user.sendEmailVerification();
+          Alert.alert('Sign Up', 'Email has been sent !');
+          console.log('create User With Email And Password : ', res);
+          console.log('Response : ', res.user);
+
+          // AsyncStorage.setItem('USER', JSON.stringify(res.user));
+          // navigation.replace(ScreenNames.HomeTab, {
+          //   user: res.user.displayName ? res.user.displayName : 'User',
+          // });
+        });
+
       // .then(user=>{
       //   return user
       //   .user.updateProfile({
       //     displayName:username
       //   })
-        
       // });
-      console.log('create User With Email And Password : ',res)
-      console.log('Response : ',res.user)
-      
-      await AsyncStorage.setItem('USER', JSON.stringify(res.user));
-       navigation.replace(ScreenNames.HomeTab, {
-         user: res.user.displayName ? res.user.displayName : "User",
-       });
     } catch (error) {
       console.log(error.userInfo?.message);
-      if (error.userInfo?.message){
-
+      if (error.userInfo?.message) {
         Alert.alert('Sign Up', error.userInfo?.message);
-      }else{
+      } else {
         Alert.alert('Sign Up', 'Something went wrong !');
       }
     }
-  }
+  };
 
   return (
     <KeyboardAwareScrollView scrollEnabled={false} enableOnAndroid={true}>
@@ -202,7 +203,7 @@ const SignUpScreen = ({navigation,route}) => {
                   // ];
                   // await AsyncStorage.setItem('USERLIST', JSON.stringify(temp));
                   // navigation.goBack();
-                  createAndSignIn(email,password)
+                  createAndSignIn(email, password);
                 }
               }}
             />
