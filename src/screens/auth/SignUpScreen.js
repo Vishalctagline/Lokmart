@@ -49,10 +49,11 @@ const SignUpScreen = ({navigation, route}) => {
         .createUserWithEmailAndPassword(email, password)
         .then(res => {
           res.user.sendEmailVerification();
-          Alert.alert('Sign Up', 'Email has been sent !');
+          Alert.alert('Sign Up', 'Email has been sent !',);
           console.log('create User With Email And Password : ', res);
           console.log('Response : ', res.user);
-
+          navigation.goBack()
+          
           // AsyncStorage.setItem('USER', JSON.stringify(res.user));
           // navigation.replace(ScreenNames.HomeTab, {
           //   user: res.user.displayName ? res.user.displayName : 'User',

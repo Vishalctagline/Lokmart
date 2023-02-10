@@ -23,7 +23,7 @@ import ShoppingAddressScreen from './src/screens/ShoppingAddressScreen';
 import AddNewCardScreen from './src/screens/AddNewCardScreen';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {ScreenNames} from './src/navigation/ScreenNames';
-import {GoogleSignin} from '@react-native-community/google-signin';
+import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import {Provider} from 'react-redux';
 import {store} from './src/redux/store/store';
 import PhoneNumSignInScreen from './src/screens/PhoneNumSignInScreen';
@@ -113,7 +113,7 @@ const App = () => {
 
   const isSignedIn = async () => {
     const isSignIn = await GoogleSignin.isSignedIn();
-    // console.log('Google issignin',isSignIn)
+    console.log('Google issignin',isSignIn)
     if (isSignIn) {
       getCurrentUserInfo();
     } else {

@@ -31,18 +31,18 @@
 		04AE947829770ADE0057EBB7 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04AE947729770ADE0057EBB7 /* FBSDKShareKit.framework */; };
 		04AE947B2977F39A0057EBB7 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AE947A2977F39A0057EBB7 /* File.swift */; };
 		04B92A54298134B100DEF896 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 04B92A53298134B100DEF896 /* GoogleService-Info.plist */; };
-		1066D80099C655AD04C33AAF /* libPods-Lokmart-LokmartTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D549B51C3354FB603F4E8E3 /* libPods-Lokmart-LokmartTests.a */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
+		1739643A0ABA9A6F163664E1 /* Pods_Lokmart_LokmartTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5B49DB47668369018DE7839 /* Pods_Lokmart_LokmartTests.framework */; };
 		176290816EE1452290ADB098 /* Poppins-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 34B5DDCB69514997AF8029D7 /* Poppins-Italic.ttf */; };
 		2B859F49636D4C6299AABE1D /* Poppins-ThinItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EB96875FA30C4329924D95C4 /* Poppins-ThinItalic.ttf */; };
 		58F127D5C2F643998841DF56 /* Poppins-SemiBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B348884A8FDB4B3DB51F5C67 /* Poppins-SemiBoldItalic.ttf */; };
 		5CA77CA55327460CA8405A36 /* Poppins-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A4EA5B7CAC3443278B5A26FD /* Poppins-Regular.ttf */; };
 		5F3D3FEEEE4B4A41AD22FB38 /* Poppins-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 528E0F08171C405983469CF7 /* Poppins-Bold.ttf */; };
+		65630CD8181071950BBA1D55 /* Pods_Lokmart.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2A53DED20BBE6F76990D0E1 /* Pods_Lokmart.framework */; };
 		671401B95C1B4695A99BE03C /* Poppins-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D1B5FA02757747E0B0091252 /* Poppins-Thin.ttf */; };
 		7CBA11DDE20B469DB60AAAF5 /* Poppins-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4E7AF414F4D0472D86C0F928 /* Poppins-BlackItalic.ttf */; };
-		7E07D97251F25DAB14A138AC /* libPods-Lokmart.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B0826F403B0D046D495AD369 /* libPods-Lokmart.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		8451F1723227443D9C7D54AE /* Poppins-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CD1F7FCEC3974F83AD47481F /* Poppins-SemiBold.ttf */; };
 		8E4D953E1D7746DEB853C5A4 /* Poppins-ExtraLightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 49E42E03CEE941A482F0B87A /* Poppins-ExtraLightItalic.ttf */; };
@@ -110,14 +110,14 @@
 		4E7AF414F4D0472D86C0F928 /* Poppins-BlackItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-BlackItalic.ttf"; path = "../src/assets/fonts/Poppins-BlackItalic.ttf"; sourceTree = "<group>"; };
 		528E0F08171C405983469CF7 /* Poppins-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Bold.ttf"; path = "../src/assets/fonts/Poppins-Bold.ttf"; sourceTree = "<group>"; };
 		75042AFA73C9422280C0E891 /* Poppins-Black.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Black.ttf"; path = "../src/assets/fonts/Poppins-Black.ttf"; sourceTree = "<group>"; };
-		7D549B51C3354FB603F4E8E3 /* libPods-Lokmart-LokmartTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Lokmart-LokmartTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = Lokmart/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		834E8A83942D3103C339F5A1 /* Pods-Lokmart.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lokmart.release.xcconfig"; path = "Target Support Files/Pods-Lokmart/Pods-Lokmart.release.xcconfig"; sourceTree = "<group>"; };
 		A4EA5B7CAC3443278B5A26FD /* Poppins-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Regular.ttf"; path = "../src/assets/fonts/Poppins-Regular.ttf"; sourceTree = "<group>"; };
-		B0826F403B0D046D495AD369 /* libPods-Lokmart.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Lokmart.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B154EEFC2F582154CF5C906A /* Pods-Lokmart.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lokmart.debug.xcconfig"; path = "Target Support Files/Pods-Lokmart/Pods-Lokmart.debug.xcconfig"; sourceTree = "<group>"; };
+		B2A53DED20BBE6F76990D0E1 /* Pods_Lokmart.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Lokmart.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B348884A8FDB4B3DB51F5C67 /* Poppins-SemiBoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-SemiBoldItalic.ttf"; path = "../src/assets/fonts/Poppins-SemiBoldItalic.ttf"; sourceTree = "<group>"; };
 		B3846CC4D60AA62660C9FF96 /* Pods-Lokmart-LokmartTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lokmart-LokmartTests.release.xcconfig"; path = "Target Support Files/Pods-Lokmart-LokmartTests/Pods-Lokmart-LokmartTests.release.xcconfig"; sourceTree = "<group>"; };
+		B5B49DB47668369018DE7839 /* Pods_Lokmart_LokmartTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Lokmart_LokmartTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BDCB201A9933404B9564D4CB /* Poppins-ExtraBoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-ExtraBoldItalic.ttf"; path = "../src/assets/fonts/Poppins-ExtraBoldItalic.ttf"; sourceTree = "<group>"; };
 		CD1F7FCEC3974F83AD47481F /* Poppins-SemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-SemiBold.ttf"; path = "../src/assets/fonts/Poppins-SemiBold.ttf"; sourceTree = "<group>"; };
 		CE9B4E3FEE0CB9A5CA2BEB91 /* Pods-Lokmart-LokmartTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lokmart-LokmartTests.debug.xcconfig"; path = "Target Support Files/Pods-Lokmart-LokmartTests/Pods-Lokmart-LokmartTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -136,7 +136,7 @@
 				04AE947829770ADE0057EBB7 /* FBSDKShareKit.framework in Frameworks */,
 				04AE947629770ACD0057EBB7 /* FBSDKLoginKit.framework in Frameworks */,
 				04AE947229770AAA0057EBB7 /* Bolts.framework in Frameworks */,
-				1066D80099C655AD04C33AAF /* libPods-Lokmart-LokmartTests.a in Frameworks */,
+				1739643A0ABA9A6F163664E1 /* Pods_Lokmart_LokmartTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -144,7 +144,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7E07D97251F25DAB14A138AC /* libPods-Lokmart.a in Frameworks */,
+				65630CD8181071950BBA1D55 /* Pods_Lokmart.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -217,8 +217,8 @@
 				04AE947329770ABD0057EBB7 /* FBSDKCoreKit.framework */,
 				04AE947129770AAA0057EBB7 /* Bolts.framework */,
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
-				B0826F403B0D046D495AD369 /* libPods-Lokmart.a */,
-				7D549B51C3354FB603F4E8E3 /* libPods-Lokmart-LokmartTests.a */,
+				B2A53DED20BBE6F76990D0E1 /* Pods_Lokmart.framework */,
+				B5B49DB47668369018DE7839 /* Pods_Lokmart_LokmartTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -303,7 +303,6 @@
 				00E356EB1AD99517003FC87E /* Frameworks */,
 				00E356EC1AD99517003FC87E /* Resources */,
 				46ECEFF280F742EC0CE30284 /* [CP] Embed Pods Frameworks */,
-				99C89E7ED80B373D07899C89 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -326,7 +325,6 @@
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
 				30CC99539CFF1C493FF779A7 /* [CP] Embed Pods Frameworks */,
-				5C63B237F0BF407A16C9D2E2 /* [CP] Copy Pods Resources */,
 				EB43B6E01DF15D6A0D2644B2 /* [CP-User] [RNFB] Core Configuration */,
 			);
 			buildRules = (
@@ -483,23 +481,6 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Lokmart-LokmartTests/Pods-Lokmart-LokmartTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		5C63B237F0BF407A16C9D2E2 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Lokmart/Pods-Lokmart-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Lokmart/Pods-Lokmart-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Lokmart/Pods-Lokmart-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		8A03457D0795035ED4E15AF5 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -542,23 +523,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		99C89E7ED80B373D07899C89 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Lokmart-LokmartTests/Pods-Lokmart-LokmartTests-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Lokmart-LokmartTests/Pods-Lokmart-LokmartTests-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Lokmart-LokmartTests/Pods-Lokmart-LokmartTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		EB43B6E01DF15D6A0D2644B2 /* [CP-User] [RNFB] Core Configuration */ = {

@@ -1,5 +1,6 @@
 #import "AppDelegate.h"
 
+//#import <UIKit/UIKit.h>	
 #import <Firebase.h>
 
 #import <React/RCTBridge.h>

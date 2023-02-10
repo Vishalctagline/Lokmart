@@ -7,6 +7,7 @@ import {
   ScrollView,
   TouchableWithoutFeedback,
   ActivityIndicator,
+  Alert
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {
@@ -31,44 +32,49 @@ import {fonts} from '../styles/fonts';
 import Carousel, {Pagination, ParallaxImage} from 'react-native-snap-carousel';
 import {ScreenNames} from '../navigation/ScreenNames';
 import { sizes } from '../styles/sizes';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import firestore from '@react-native-firebase/firestore';
 
-const Header = ({username}) => (
-  <View
-    style={{
-      flexDirection: 'row',
-      alignItems: 'center',
-      justifyContent: 'space-between',
-      margin: 20,
-      flex:1
-    }}>
-    <View style={{flex:1}}>
-      <Text style={{...fonts.h1,}} numberOfLines={1}>Hello, {username}</Text>
-      <Text
-        style={{
-          fontFamily: 'Poppins-Regular',
-          fontSize: 14,
-          fontWeight: '400',
-          lineHeight: 21,
-          color: colors.soft_grey,
-        }}>
-        Good morning.
-      </Text>
-    </View>
-    <View style={{flexDirection: 'row', alignItems: 'center'}}>
-      <View>
-        <Icon name="bell-o" size={30} color={colors.black} />
-        <View style={styles.IconBadge}>
-          <Text style={{color: colors.white, fontSize: 10}}>5</Text>
-        </View>
+const Header = ({username,img}) => {
+  
+  return (
+    <View
+      style={{
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        margin: 20,
+        flex: 1,
+      }}>
+      <View style={{flex: 1}}>
+        <Text style={{...fonts.h1}} numberOfLines={1}>
+          Hello, {username}
+        </Text>
+        <Text
+          style={{
+            fontFamily: 'Poppins-Regular',
+            fontSize: 14,
+            fontWeight: '400',
+            lineHeight: 21,
+            color: colors.soft_grey,
+          }}>
+          Good morning.
+        </Text>
       </View>
-      <View style={{width: 20}} />
-      <Image
-        source={require('../assets/images/user.png')}
-        style={styles.profileImg}
-      />
+      <View style={{flexDirection: 'row', alignItems: 'center'}}>
+        <View>
+          <Icon name="bell-o" size={30} color={colors.black} />
+          <View style={styles.IconBadge}>
+            <Text style={{color: colors.white, fontSize: 10}}>5</Text>
+          </View>
+        </View>
+        <View style={{width: 20}} />
+        {img=='' ? <ActivityIndicator /> :
+        <Image source={{uri: img}} style={styles.profileImg} />
+      }
+      </View>
     </View>
-  </View>
-);
+  );};
 
 const PopularCard = ({item, onPress = () => {}}) => {
   const [Item, setitem] = useState(item);
@@ -251,11 +257,14 @@ const CategoryCard = ({item, onPress = () => {}}) => {
 const HomeScreen = props => {
   // console.log(allGrocery[1])
   // console.log(getStatusBarHeight(), props.route.params.user);
-  const username = props.route.params.user;
+  // const username = props.route.params.user;
   const [items, setitems] = useState(allGrocery);
   const [index, setindex] = useState(0);
   const [categoryList, setcategoryList] = useState([]);
   const [productList, setproductList] = useState([]);
+
+  const [username, setusername] = useState('');
+  const [img, setimg] = useState('');
 
   const getCategoryList = async () => {
     const response = await fetch('https://dummyjson.com/products/categories');
@@ -271,9 +280,27 @@ const HomeScreen = props => {
     setproductList(jsonData.products);
   };
 
-
+const getUserDetails = async () => {
+  const user = JSON.parse(await AsyncStorage.getItem('USER'));  
+  firestore()
+    .collection('users')
+    .doc(user.id.toString())
+    .get()
+    .then(snapShot => {
+      
+      const data = snapShot.data();
+      
+      setusername(data.username);
+      setimg(data.image);
+    })
+    .catch(e => Alert.alert('Profile', e));
+};
 
   useEffect(() => {
+    props.navigation.addListener('focus', () => {
+      getUserDetails();
+      // getUserList();
+    });
     getCategoryList();
     getProductList();
   }, []);
@@ -281,7 +308,7 @@ const HomeScreen = props => {
   return (
     <View style={styles.mainContainer}>
       <ScrollView showsVerticalScrollIndicator={false}>
-        <Header username={username} />
+        <Header username={username} img={img}/>
         <SearchBar
           {...props}
           onPress={() => {

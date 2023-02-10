@@ -26,7 +26,7 @@ import {
   GoogleSignin,
   GoogleSigninButton,
   statusCodes,
-} from '@react-native-community/google-signin';
+} from '@react-native-google-signin/google-signin';
 import {
   AccessToken,
   LoginButton,
@@ -37,9 +37,10 @@ import {
 //   GoogleSignin,
 //   GoogleSigninButton,
 //   statusCodes,
-// } from '@react-native-community/google-signin';
+// } from '@react-native-google-signin/google-signin';
 
 import auth from '@react-native-firebase/auth';
+import firestore from '@react-native-firebase/firestore';
 
 const SignInScreen = ({navigation}) => {
   const [userList, setuserList] = useState([]);
@@ -65,31 +66,87 @@ const SignInScreen = ({navigation}) => {
       console.log('response : ', response);
       console.log('status : ', response.status);
       const jsonData = await response.json();
-      // console.log('jsondata : ', jsonData);
-      setisLoading(false);
+      console.log('jsondata : ', jsonData.id);
+
       if (response.status == 200) {
-        await AsyncStorage.setItem('USER', JSON.stringify(jsonData));
-        navigation.replace(ScreenNames.HomeTab, {
-          user: jsonData.username,
-        });
+        // firestore
+        const usersDocument = await firestore()
+          .collection('users')
+          .doc(jsonData.id.toString())
+          .get();
+        console.log('usersDocument GET ; ', usersDocument);
+        // usersCollection.add(jsonData).then(()=>{
+        //   console.log('Added !')
+        // }).catch(e=>console.log(e));
+        if (usersDocument.exists) {
+          const data=usersDocument.data()
+          console.log('DATA exists : ', data);
+          await AsyncStorage.setItem('USER', JSON.stringify(data));
+          navigation.replace(ScreenNames.HomeTab, );
+        } else {
+          firestore()
+            .collection('users')
+            .doc(jsonData.id.toString())
+            .set(jsonData)
+            .then(() => {
+              console.log('setted !!');
+            })
+            .catch(e => {
+              console.log(e);
+            });
+          setisLoading(false);
+          await AsyncStorage.setItem('USER', JSON.stringify(jsonData));
+          navigation.replace(ScreenNames.HomeTab);
+        }
       } else if (response.status == 400) {
         auth()
           .signInWithEmailAndPassword(username, password)
           .then(res => {
-            console.log('User : ',res)
+            console.log('User : ', res.user);
             setisLoading(false);
-            if(res.user.emailVerified){
+            if (res.user.emailVerified) {
+              console.log('Result user : ', res.user);
+              const data = {
+                id: res.user?.uid,
+                firstName: res.user?.givenName,
+                lastName: res.user?.familyName,
+                image: res.user?.photoURL,
+                username: res.user?.name,
+                email: res.user?.email,
+              };
+              // firestore
+              const usersCollection = firestore().collection('users');
+              console.log('usersCollection GET ; ', usersCollection);
+              usersCollection
+                .doc(data.id)
+                .set(data)
+                .then(() => {
+                  console.log('setted !!');
+                })
+                .catch(e => {
+                  console.log(e);
+                });
+              setisLoading(false);
+              // AsyncStorage.setItem('USER', JSON.stringify(res.user));
+              AsyncStorage.setItem('USER', JSON.stringify(data));
+              // navigation.replace(ScreenNames.HomeTab, {
+              //   user: res.user.displayName ? res.user.displayName : 'User',
+              // });
               navigation.replace(ScreenNames.HomeTab, {
-                user: res.user.displayName ? res.user.displayName : 'User',
+                user: data.username,
               });
-            }else{
-              Alert.alert('Sign In', "Please verify your Email.")
+            } else {
+              setisLoading(false);
+              Alert.alert('Sign In', 'Please verify your Email.');
             }
           })
-          .catch(err => Alert.alert('Sign In', err.toString()));
-        }else{
-          Alert.alert('SignIn', jsonData.message);
-        }
+          .catch(err => {
+            setisLoading(false);
+            Alert.alert('Sign In', err.toString());
+          });
+      } else {
+        Alert.alert('SignIn', jsonData.message);
+      }
     } catch (error) {
       setisLoading(false);
       console.log(error);
@@ -149,8 +206,31 @@ const SignInScreen = ({navigation}) => {
     try {
       await GoogleSignin.hasPlayServices();
       const userInfo = await GoogleSignin.signIn();
-      console.log(userInfo);
-      await AsyncStorage.setItem('USER', JSON.stringify(userInfo.user));
+      console.log('User : ', userInfo);
+
+      const data = {
+        id: userInfo.user.id,
+        firstName: userInfo.user.givenName,
+        lastName: userInfo.user.familyName,
+        image: userInfo.user.photo,
+        username: userInfo.user.name,
+        email: userInfo.user.email,
+      };
+      // firestore
+      const usersCollection = firestore().collection('users');
+      console.log('usersCollection  ; ', usersCollection);
+      usersCollection
+        .doc(data.id)
+        .set(data)
+        .then(() => {
+          console.log('setted !!');
+        })
+        .catch(e => {
+          console.log(e);
+        });
+
+      // await AsyncStorage.setItem('USER', JSON.stringify(userInfo.user));
+      await AsyncStorage.setItem('USER', JSON.stringify(data));
       // setuser(userInfo)
 
       // Create a Google credential with the token
@@ -160,8 +240,11 @@ const SignInScreen = ({navigation}) => {
 
       // Sign-in the user with the credential
       auth().signInWithCredential(googleCredential);
+      // navigation.replace(ScreenNames.HomeTab, {
+      //   user: userInfo.user.name,
+      // });
       navigation.replace(ScreenNames.HomeTab, {
-        user: userInfo.user.name,
+        user: data.username,
       });
     } catch (error) {
       console.log('SignIn ERROR : ', error.code);
@@ -194,7 +277,29 @@ const SignInScreen = ({navigation}) => {
                 console.log(
                   'The current logged user is: ' + currentProfile.name,
                 );
-                AsyncStorage.setItem('USER', JSON.stringify(currentProfile));
+                const Data = {
+                  id: currentProfile.userID,
+                  firstName: currentProfile.firstName,
+                  lastName: currentProfile.lastName,
+                  image: currentProfile.imageURL,
+                  username: currentProfile.name,
+                  email: currentProfile.email,
+                };
+                // firestore
+                const usersCollection = firestore().collection('users');
+                console.log('usersCollection  ; ', usersCollection);
+                usersCollection
+                  .doc(Data.id)
+                  .set(Data)
+                  .then(() => {
+                    console.log('setted !!');
+                  })
+                  .catch(e => {
+                    console.log(e);
+                  });
+
+                // AsyncStorage.setItem('USER', JSON.stringify(currentProfile));
+                AsyncStorage.setItem('USER', JSON.stringify(Data));
 
                 // Once signed in, get the users AccesToken
                 const data = await AccessToken.getCurrentAccessToken();
