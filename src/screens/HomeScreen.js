@@ -3,7 +3,6 @@ import {
   Text,
   StyleSheet,
   Image,
-  TextInput,
   ScrollView,
   TouchableWithoutFeedback,
   ActivityIndicator,
@@ -17,13 +16,9 @@ import {
 import {getStatusBarHeight} from 'react-native-status-bar-height';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {colors} from '../styles/colors';
-import Swiper from 'react-native-swiper';
-import LinearGradient from 'react-native-linear-gradient';
 import {
   allGrocery,
   banners,
-  categories,
-  popularDeals,
 } from '../assets/data/data';
 import GroceryCard from '../components/GroceryCard';
 import SearchBar from '../components/SearchBar';
@@ -31,7 +26,6 @@ import {fonts} from '../styles/fonts';
 
 import Carousel, {Pagination, ParallaxImage} from 'react-native-snap-carousel';
 import {ScreenNames} from '../navigation/ScreenNames';
-import { sizes } from '../styles/sizes';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import firestore from '@react-native-firebase/firestore';
 
@@ -329,14 +323,11 @@ const getUserDetails = async () => {
               <View
                 style={{
                   flex: 1,
-                  // backgroundColor: 'red',
                 }}>
-                {/* <Image source={item.image} style={{resizeMode:'cover',height:hp('25'),width:wp('90')}}/> */}
                 <ParallaxImage
                   containerStyle={{
                     flex: 1,
                     borderRadius: 25,
-                    // backgroundColor: 'yellow',
                     marginVertical: 20,
                   }}
                   source={item.image}
@@ -349,7 +340,6 @@ const getUserDetails = async () => {
             )}
           />
           <Pagination
-            // dotContainerStyle={{backgroundColor:'red'}}
             containerStyle={{marginTop: -40}}
             dotStyle={styles.activeIndicator}
             inactiveDotStyle={styles.indicator}
@@ -407,22 +397,6 @@ const getUserDetails = async () => {
                 </ScrollView>
               </>
             )}
-
-            {/* <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-              {categories.map((item, index) =>
-                index > 3 ? null : (
-                  <CategoryCard
-                    item={item}
-                    onPress={() => {
-                      // console.log(index, item.name);
-                      props.navigation.navigate(ScreenNames.ProductScreen, {
-                        item,
-                      });
-                    }}
-                  />
-                ),
-              )}
-            </ScrollView> */}
           </View>
         </View>
         <View
@@ -573,12 +547,8 @@ const styles = StyleSheet.create({
   },
   bannerContainer: {
     flex: 1,
-    // backgroundColor: 'red',
     height: hp('25'),
     width: wp('100'),
-    // marginBottom: 15,
-    // alignItems: 'center',
-    // justifyContent: 'center',
   },
   slide: {
     flex: 1,
@@ -590,29 +560,18 @@ const styles = StyleSheet.create({
     height: 5,
     width: 18,
     backgroundColor: colors.grey,
-    // margin: 2.5,
-    // top: hp('4'),
   },
   activeIndicator: {
     borderRadius: 20,
     height: 5,
     width: 30,
     backgroundColor: colors.solid_primary,
-    // margin: 2.5,
-    // top: hp('4'),
-  },
-  categoriesContainer: {
-    // backgroundColor: 'red',
-    // marginHorizontal: 20,
   },
   categoryImg: {
     height: 80,
     width: 80,
     margin: 10,
     resizeMode:'cover'
-  },
-  popularDealsContainer: {
-    // backgroundColor:'red'
   },
 });
 

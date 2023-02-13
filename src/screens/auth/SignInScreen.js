@@ -75,9 +75,6 @@ const SignInScreen = ({navigation}) => {
           .doc(jsonData.id.toString())
           .get();
         console.log('usersDocument GET ; ', usersDocument);
-        // usersCollection.add(jsonData).then(()=>{
-        //   console.log('Added !')
-        // }).catch(e=>console.log(e));
         if (usersDocument.exists) {
           const data=usersDocument.data()
           console.log('DATA exists : ', data);
@@ -107,12 +104,16 @@ const SignInScreen = ({navigation}) => {
             if (res.user.emailVerified) {
               console.log('Result user : ', res.user);
               const data = {
-                id: res.user?.uid,
-                firstName: res.user?.givenName,
-                lastName: res.user?.familyName,
-                image: res.user?.photoURL,
-                username: res.user?.name,
-                email: res.user?.email,
+                id: res.user.uid,
+                firstName: 'firstName',
+                lastName: 'lastName',
+                image:
+                  res.user.photoURL == null
+                    ? 'https://reactnative-examples.com/wp-content/uploads/2022/02/error-image.png'
+                    : res.user.photoURL,
+                username:
+                  res.user.displayName == null ? 'User' : res.user.displayName,
+                email: res.user.email,
               };
               // firestore
               const usersCollection = firestore().collection('users');
@@ -453,36 +454,11 @@ const SignInScreen = ({navigation}) => {
                     );
                   } else {
                     console.log('done');
-
                     authUser();
-
-                    // const users = JSON.parse(
-                    //   await AsyncStorage.getItem('USERLIST'),
-                    // );
-                    // console.log('USERS : ', users);
-                    // const user = users.find(user => {
-                    //   return (
-                    //     user.username == username && user.password == password
-                    //   );
-                    // });
-                    // console.log('finded user :', user);
-                    // if (!user) {
-                    //   Alert.alert('Sign In', 'Invalid User !!');
-                    // } else {
-                    //   console.log('matched');
-                    //   {
-                    //     isChecked &&
-                    //       (await AsyncStorage.setItem('USER', username));
-                    //   }
-                    //   navigation.replace(ScreenNames.HomeTab, {
-                    //     user: username,
-                    //   });
-                    // }
                   }
                 }}
               />
             )}
-
             {/* <GoogleSigninButton onPress={signIn} /> */}
             {/* <LoginButton
               onLoginFinished={(error, result) => {

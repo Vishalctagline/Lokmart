@@ -27,6 +27,7 @@ import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import {Provider} from 'react-redux';
 import {store} from './src/redux/store/store';
 import PhoneNumSignInScreen from './src/screens/PhoneNumSignInScreen';
+import TodoScreen from './src/screens/realtimeDatabase/TodoScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -154,7 +155,8 @@ const App = () => {
         <NavigationContainer>
           <Stack.Navigator
             screenOptions={{headerShown: false}}
-            initialRouteName={username == 'logout' ? 'AuthScreen' : 'Home'}>
+            // initialRouteName={username == 'logout' ? 'AuthScreen' : 'Home'}
+            initialRouteName={ScreenNames.TodoScreen}>
             <Stack.Screen
               name={ScreenNames.AuthScreen}
               component={AuthScreens}
@@ -200,6 +202,11 @@ const App = () => {
             <Stack.Screen
               name={ScreenNames.PhoneNumSignInScreen}
               component={PhoneNumSignInScreen}
+            />
+
+            <Stack.Screen
+              name={ScreenNames.TodoScreen}
+              component={TodoScreen}
             />
           </Stack.Navigator>
         </NavigationContainer>

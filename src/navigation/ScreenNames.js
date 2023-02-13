@@ -18,4 +18,6 @@ export const ScreenNames = {
   ShoppingCartScreen: 'ShoppingCartScreen',
   ShoppingAddressScreen: 'ShoppingAddressScreen',
   AddNewCardScreen: 'AddNewCardScreen',
+
+  TodoScreen: 'TodoScreen',
 };
