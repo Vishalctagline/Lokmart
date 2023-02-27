@@ -17,26 +17,28 @@ import {
 } from 'react-native-responsive-screen-hooks';
 import { orderList } from '../assets/data/data';
 import { GlobalStyles } from '../styles/GlobalStyle';
+import strings from '../config/Localization';
+import { useRtlContext } from 'react-native-easy-localization-and-rtl';
 
 const orderTab = [
   {
     id: 1,
-    title: 'All',
+    title: strings.all,
     color: '',
   },
   {
     id: 2,
-    title: 'On Delivery',
+    title: strings.onDelivery,
     color: 'orange',
   },
   {
     id: 3,
-    title: 'Completed',
+    title: strings.completed,
     color: 'green',
   },
   {
     id: 4,
-    title: 'Canceled',
+    title: strings.canceled,
     color: 'red',
   },
 ];
@@ -93,13 +95,13 @@ const OrderCard=({id,items,status})=>{
   
   let bgColor=''
   let color=''
-  if(status=='On Delivery'){
+  if(status==strings.onDelivery){
     bgColor = 'rgba(255, 140, 0, 0.15)';
     color='#FFA902'
-  }else if(status == 'Completed'){
+  }else if(status == strings.completed){
     bgColor = 'green';
     color='white'
-  }else if(status =='Canceled'){
+  }else if(status ==strings.canceled){
     bgColor = 'red';
         color = 'white';
 
@@ -126,9 +128,9 @@ const OrderCard=({id,items,status})=>{
             <Icon name="gift" size={30} color={color} />
           </View>
           <View>
-            <Text style={fonts.h7}>Order ID {id}</Text>
+            <Text style={fonts.h7}>{strings.orderId} {id}</Text>
             <View style={{flexDirection: 'row', alignItems: 'center'}}>
-              <Text style={fonts.h8}>{items} Items</Text>
+              <Text style={fonts.h8}>{items} {strings.itms}</Text>
               <View
                 style={{
                   height: 5,
@@ -180,17 +182,20 @@ const OrderCard=({id,items,status})=>{
 
 const MyOrdersScreen = () => {
 
+  // const {RtlStyles}=useRtlContext()
+  // console.log(RtlStyles.containerRow)
   const [selectedIndex, setselectedIndex] = useState(0);
 
   const [isView, setisView] = useState(false)
 
   return (
-    <View style={{...GlobalStyles.mainContainer,paddingHorizontal:0}}>
+    <View style={{...GlobalStyles.mainContainer, paddingHorizontal:0}}>
       <SafeAreaView
         style={{
           // height: 100,
           // borderWidth: 1,
           flexDirection: 'row',
+          // ...RtlStyles.flipHorizontal,
           alignItems: 'center',
           justifyContent: 'space-between',
           backgroundColor: colors.white,
@@ -203,7 +208,7 @@ const MyOrdersScreen = () => {
             alignItems: 'center',
             marginLeft: 20,
           }}>
-          <Text style={fonts.h4}>My Orders</Text>
+          <Text style={fonts.h4}>{strings.myOrders}</Text>
         </View>
         <TouchableWithoutFeedback onPress={() => {}}>
           <Icon

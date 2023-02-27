@@ -7,6 +7,8 @@ import {
   ActivityIndicator,
   TouchableWithoutFeedback,
   Image,
+  RefreshControl,
+  I18nManager,
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -26,8 +28,13 @@ import CustomInput from '../components/CustomInput';
 import {GlobalStyles} from '../styles/GlobalStyle';
 import {sizes} from '../styles/sizes';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
+import strings, { changeLanguage } from '../config/Localization';
+import { useRtlContext } from 'react-native-easy-localization-and-rtl';
 
 const ProfileScreen = props => {
+
+  const { RtlStyles,isRtl,language,setLanguage }=useRtlContext()
+
   const [loading, setloading] = useState(true);
   const [List, setList] = useState([]);
 
@@ -38,12 +45,17 @@ const ProfileScreen = props => {
   const [email, setemail] = useState('');
   const [img, setimg] = useState('');
 
+  // const [isrtl, setisrtl] = useState(false);
+
   useEffect(() => {
     props.navigation.addListener('focus', () => {
       getUserDetails();
       // getUserList();
     });
-  }, []);
+    // I18nManager.forceRTL(true)
+  }, [
+    // isrtl
+  ]);
 
   const getUserDetails = async () => {
     const user = JSON.parse(await AsyncStorage.getItem('USER'));
@@ -117,28 +129,87 @@ const ProfileScreen = props => {
       });
   };
 
+  
+
+
   return (
     <>
-      <CustomHeader title={'Profile '} noBack />
+      <CustomHeader
+        title={strings.profile}
+        noBack
+        onMenuPress={() => {
+          console.log('Menu opition pressed !!');
+        }}
+      />
       <View style={GlobalStyles.mainContainer}>
         {loading ? (
           <ActivityIndicator style={{alignSelf: 'center'}} />
         ) : (
           <>
-            <KeyboardAwareScrollView scrollEnabled enableOnAndroid={true}>
+            <View
+              style={{
+                flexDirection: 'row',
+                justifyContent: 'space-around',
+                margin: 10,
+              }}>
+              <Text
+                onPress={() => {
+                  // console.log(isRtl)
+                  // setLanguage('en');
+                  changeLanguage('en',false);
+                }}>
+                English
+              </Text>
+              <Text
+                onPress={() => {
+                  // console.log(isRtl)
+                  // setLanguage('it')
+                  changeLanguage('it', false);
+                }}>
+                Itailan
+              </Text>
+              <Text
+                onPress={() => {
+                  // console.log(isRtl)
+                  // setLanguage('hi');
+                  changeLanguage('hi', false);
+                }}>
+                Hindi
+              </Text>
+              <Text
+                onPress={() => {
+                  // console.log(isRtl)
+                  // setLanguage('mrth');
+                  changeLanguage('mrth', false);
+                }}>
+                Marathi
+              </Text>
+              <Text
+                onPress={() => {
+                  // console.log(isRtl)
+                  // setLanguage('ar')
+                  changeLanguage('ar', true);
+                }}>
+                Arabic
+              </Text>
+            </View>
+            <KeyboardAwareScrollView
+              scrollEnabled
+              enableOnAndroid={true}
+              showsVerticalScrollIndicator={false}>
               <View
                 style={{
                   // backgroundColor: 'red',
                   height: sizes.height / 8,
                   width: sizes.height / 8,
                   alignSelf: 'center',
-                  margin: 15,
+                  // margin: 15,
                 }}>
                 {img == '' ? (
                   <ActivityIndicator />
                 ) : (
                   <>
-                  {console.log('IMAGE : ',img)}
+                    {console.log('IMAGE : ', img)}
                     <Image
                       style={styles.img}
                       source={{
@@ -166,9 +237,8 @@ const ProfileScreen = props => {
                                 console.log('res.assets[0].uri');
                               }
                             });
-                            
                           } catch (error) {
-                            Alert.alert('Profile',error.toString())
+                            Alert.alert('Profile', error.toString());
                           }
                         }}
                       />
@@ -193,7 +263,7 @@ const ProfileScreen = props => {
 
               <View style={{height: 10}} />
               <CustomButton
-                title={'Update Profile'}
+                title={strings.updateProfile}
                 onPress={() => {
                   if (
                     username.trim() == '' ||
@@ -209,7 +279,7 @@ const ProfileScreen = props => {
               />
               <View style={{height: 10}} />
               <CustomButton
-                title={'Log Out'}
+                title={strings.logout}
                 onPress={async () => {
                   try {
                     //google
@@ -270,7 +340,7 @@ const ProfileScreen = props => {
                 onPress={() => {
                   deleteUser(id);
                 }}>
-                Delele User
+                {strings.delete}
               </Text>
               {/* <Text
             onPress={async () => {
@@ -327,11 +397,12 @@ const ProfileScreen = props => {
         Log Out
       </Text> */}
               <Text
+              // style={RtlStyles.text}
                 onPress={async () => {
                   await AsyncStorage.setItem('CARTLIST', JSON.stringify([]));
-                  Alert.alert('Cart List', 'Clear Cart List');
+                  Alert.alert('Cart List', strings.clrCart);
                 }}>
-                Clear Cart List
+                {strings.clrCart}
               </Text>
             </KeyboardAwareScrollView>
             {/* <FlatList

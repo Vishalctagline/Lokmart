@@ -1,13 +1,14 @@
-import { View, Text, SafeAreaView, TouchableWithoutFeedback } from 'react-native'
+import { View, Text, SafeAreaView, TouchableWithoutFeedback, I18nManager } from 'react-native'
 import React from 'react'
 import { heightPercentageToDP } from 'react-native-responsive-screen-hooks';
-import { getStatusBarHeight } from 'react-native-status-bar-height';
 import {colors} from '../styles/colors';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { fonts } from '../styles/fonts';
-
+import { useRtlContext } from 'react-native-easy-localization-and-rtl';
 
 const CustomHeader = (props) => {
+  // const {RtlStyles,isRtl}=useRtlContext()
+  // console.log(RtlStyles.containerRow)
   return (
     <SafeAreaView
       style={{
@@ -17,25 +18,44 @@ const CustomHeader = (props) => {
         alignItems: 'center',
         justifyContent: 'space-between',
         backgroundColor: colors.white,
-        marginTop: Platform.OS === 'android' ? getStatusBarHeight() : 0,
+        // marginTop: Platform.OS === 'android' ? getStatusBarHeight() : 0,
+        // ...RtlStyles.containerRow,
       }}>
       <View
         style={{
           flexDirection: 'row',
           justifyContent: 'center',
           alignItems: 'center',
-          marginLeft: 20,
+          // marginLeft: 20,
+          // ...RtlStyles.containerRow,
         }}>
-        {!props.noBack && <TouchableWithoutFeedback
-          onPress={() => {
-            props.navigation.goBack();
-          }}>
-          <Icon name={props.close? "close" : "arrow-left"} size={25} color={colors.black} />
-        </TouchableWithoutFeedback>}
-        <View style={{width: 20}} />
-        <Text style={{...fonts.h4}}>{props.title}</Text>
+        {!props.noBack && (
+          <TouchableWithoutFeedback
+            onPress={() => {
+              props.navigation.goBack();
+            }}>
+            <Icon
+              name={
+                props.close ? 'close' : 'arrow-left'
+              }
+              size={25}
+              color={colors.black}
+              style={{marginHorizontal: 20,
+              // ...RtlStyles.flipHorizontal
+              transform:[{scaleX: I18nManager.isRTL ? -1 : 1}]
+            }}
+            />
+          </TouchableWithoutFeedback>
+        )}
+        {/* <View style={{width: 20,backgroundColor:'red'}} /> */}
+        <Text style={{...fonts.h4, marginHorizontal: 20}}>{props.title}</Text>
       </View>
-      <View style={{flexDirection: 'row', marginHorizontal: 20}}>
+      <View
+        style={{
+          flexDirection: 'row',
+          marginHorizontal: 20,
+          // ...RtlStyles.containerRow,
+        }}>
         {props.fav && (
           <TouchableWithoutFeedback onPress={props.onFav}>
             <Icon
@@ -49,13 +69,13 @@ const CustomHeader = (props) => {
         <View style={{width: 25}} />
         {props.reset ? (
           <Text
-          onPress={props.resetOnPress}
-            style={{...fonts.h7,color:colors.primary_color}}>
+            onPress={props.resetOnPress}
+            style={{...fonts.h7, color: colors.primary_color}}>
             Reset
           </Text>
         ) : (
-          <TouchableWithoutFeedback onPress={() => {}}>
-            <Icon name="ellipsis-v" size={25} color={colors.black} />
+          <TouchableWithoutFeedback onPress={props.onMenuPress}>
+            <Icon name={'ellipsis-v'} size={25} color={colors.black} />
           </TouchableWithoutFeedback>
         )}
       </View>

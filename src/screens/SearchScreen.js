@@ -18,6 +18,8 @@ import {
 import {getStatusBarHeight} from 'react-native-status-bar-height';
 import {fonts} from '../styles/fonts';
 import {ScreenNames} from '../navigation/ScreenNames';
+import { useRtlContext } from 'react-native-easy-localization-and-rtl';
+import strings from '../config/Localization';
 
 const RecentItem = ({itemName, onPress}) => (
   <View
@@ -47,6 +49,9 @@ const RecentItem = ({itemName, onPress}) => (
 );
 
 const SearchResultItem = props => {
+
+  // const {RtlStyles} = useRtlContext();
+
   return (
     <TouchableWithoutFeedback
       onPress={() => {
@@ -58,6 +63,7 @@ const SearchResultItem = props => {
           // backgroundColor: 'blue',
           marginVertical: 15,
           flexDirection: 'row',
+          // ...RtlStyles.containerRow,
         }}>
         <Image
           style={{
@@ -71,15 +77,22 @@ const SearchResultItem = props => {
           style={{
             flex: 1,
             // backgroundColor: 'yellow',
-            marginLeft: 20,
+            marginHorizontal: 20,
             justifyContent: 'space-evenly',
           }}>
           <Text
             // numberOfLines={1}
-            style={fonts.h5}>
+            style={[
+              // RtlStyles.text, 
+              fonts.h5]}>
             {props.item.name}
           </Text>
-          <View style={{flexDirection: 'row', alignItems: 'center'}}>
+          <View
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              // ...RtlStyles.containerRow,
+            }}>
             <View
               style={{
                 borderWidth: 1,
@@ -89,6 +102,7 @@ const SearchResultItem = props => {
                 alignItems: 'center',
                 justifyContent: 'space-evenly',
                 borderColor: '#B8BBC6',
+                // ...RtlStyles.containerRow,
               }}>
               <Icon name="star" color={colors.ratingStart} />
               <Text
@@ -114,7 +128,9 @@ const SearchResultItem = props => {
               {props.item.rating} Ratings
             </Text>
           </View>
-          <Text style={fonts.h7}>${props.item.price}</Text>
+          <Text style={[
+            // RtlStyles.text,
+            fonts.h7]}>${props.item.price}</Text>
         </View>
       </View>
     </TouchableWithoutFeedback>
@@ -122,6 +138,9 @@ const SearchResultItem = props => {
 };
 
 const SearchScreen = props => {
+
+  // const {RtlStyles}=useRtlContext()
+
   const [txt, settxt] = useState('');
   const [searchedList, setsearchedList] = useState([]);
   const [filterList, setfilterList] = useState([]);
@@ -152,6 +171,9 @@ const SearchScreen = props => {
           backgroundColor: colors.white,
           // height: heightPercentageToDP('10'),
           marginTop: Platform.OS === 'android' ? getStatusBarHeight() : 0,
+          flexDirection:'row',
+          // ...RtlStyles.containerRow
+
         }}>
         <TouchableWithoutFeedback
           onPress={() => {
@@ -173,8 +195,10 @@ const SearchScreen = props => {
             fontWeight: '600',
             color: colors.dark,
             marginHorizontal: 20,
+            textAlign:'left',
+            // ...RtlStyles.text,
           }}>
-          Search
+          {strings.search}
         </Text>
         <View style={{marginVertical: 10}}>
           <SearchBar
@@ -201,9 +225,7 @@ const SearchScreen = props => {
                         parseFloat(data.minDiscnt) &&
                       parseFloat(item.discount ? item.discount : '0') <=
                         parseFloat(data.maxDiscnt) &&
-                      (data.discount
-                        ? item.discount
-                        : true) &&
+                      (data.discount ? item.discount : true) &&
                       (data.freeShipping
                         ? item.freeShipping === data.freeShipping
                         : true) &&
@@ -242,7 +264,7 @@ const SearchScreen = props => {
                   ),
                 );
               } else {
-                 console.log(' txt NOT empty ');
+                console.log(' txt NOT empty ');
                 setsearchedList(
                   searchedList.filter(
                     item =>
@@ -273,7 +295,9 @@ const SearchScreen = props => {
           />
         </View>
         <View style={{marginHorizontal: 20}}>
-          <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+          <View style={{flexDirection: 'row', justifyContent: 'space-between',
+          // ...RtlStyles.containerRow
+          }}>
             <Text style={fonts.h5}>Recent Search</Text>
             <Text
               style={{...fonts.h8, color: colors.primary_color}}
@@ -299,7 +323,9 @@ const SearchScreen = props => {
           style={{height: 5, backgroundColor: colors.grey1, marginVertical: 10}}
         />
         <View style={{flex: 1, marginHorizontal: 20}}>
-          <Text style={fonts.h5}>Search Result</Text>
+          <Text style={[fonts.h5,
+            RtlStyles.text
+            ]}>Search Result</Text>
           {searchedList.length == 0 ? (
             <Text style={{...fonts.h6, alignSelf: 'center'}}>
               No data Found

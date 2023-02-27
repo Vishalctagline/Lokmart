@@ -30,7 +30,7 @@
 		04AE947629770ACD0057EBB7 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04AE947529770ACD0057EBB7 /* FBSDKLoginKit.framework */; };
 		04AE947829770ADE0057EBB7 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04AE947729770ADE0057EBB7 /* FBSDKShareKit.framework */; };
 		04AE947B2977F39A0057EBB7 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AE947A2977F39A0057EBB7 /* File.swift */; };
-		04B92A54298134B100DEF896 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 04B92A53298134B100DEF896 /* GoogleService-Info.plist */; };
+		04C3623329A4FA7F00D45D3B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 04C3623229A4FA7F00D45D3B /* GoogleService-Info.plist */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
@@ -93,7 +93,8 @@
 		04AE947729770ADE0057EBB7 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKShareKit.framework; path = "../../../../Documents/facebook-ios-sdk-current/FBSDKShareKit.framework"; sourceTree = "<group>"; };
 		04AE94792977F39A0057EBB7 /* Lokmart-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Lokmart-Bridging-Header.h"; sourceTree = "<group>"; };
 		04AE947A2977F39A0057EBB7 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
-		04B92A53298134B100DEF896 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		04C3622F29A4F05100D45D3B /* Lokmart.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = Lokmart.entitlements; path = Lokmart/Lokmart.entitlements; sourceTree = "<group>"; };
+		04C3623229A4FA7F00D45D3B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		0D326770F64048859370F64F /* Poppins-ExtraBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-ExtraBold.ttf"; path = "../src/assets/fonts/Poppins-ExtraBold.ttf"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* Lokmart.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Lokmart.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = Lokmart/AppDelegate.h; sourceTree = "<group>"; };
@@ -195,9 +196,10 @@
 		13B07FAE1A68108700A75B9A /* Lokmart */ = {
 			isa = PBXGroup;
 			children = (
+				04C3622F29A4F05100D45D3B /* Lokmart.entitlements */,
 				044A3BB529470B020055FF30 /* Fonts */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
-				04B92A53298134B100DEF896 /* GoogleService-Info.plist */,
+				04C3623229A4FA7F00D45D3B /* GoogleService-Info.plist */,
 				13B07FB01A68108700A75B9A /* AppDelegate.mm */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
@@ -394,7 +396,7 @@
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				D8D5902289544E7D91184A14 /* Poppins-Black.ttf in Resources */,
 				044A3BCA29470B020055FF30 /* FontAwesome5_Brands.ttf in Resources */,
-				04B92A54298134B100DEF896 /* GoogleService-Info.plist in Resources */,
+				04C3623329A4FA7F00D45D3B /* GoogleService-Info.plist in Resources */,
 				7CBA11DDE20B469DB60AAAF5 /* Poppins-BlackItalic.ttf in Resources */,
 				5F3D3FEEEE4B4A41AD22FB38 /* Poppins-Bold.ttf in Resources */,
 				916BC99C392B4B2AB23DE4A7 /* Poppins-BoldItalic.ttf in Resources */,
@@ -648,7 +650,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Lokmart/Lokmart.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 7639N3C25S;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = Lokmart/Info.plist;
@@ -661,8 +667,9 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.org.webapp;
 				PRODUCT_NAME = Lokmart;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Lokmart-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -676,7 +683,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Lokmart/Lokmart.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = Lokmart/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -688,8 +699,9 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.org.webapp;
 				PRODUCT_NAME = Lokmart;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Lokmart-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>625967762187-6ugcqjpvtqq7vqrqf0078dkj0slo8m9p.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.625967762187-6ugcqjpvtqq7vqrqf0078dkj0slo8m9p</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>625967762187-0due807uq1bukin63ukal0vt49s5ol23.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyA9bQ7snBH3sff7CTJQm39m18Rdd5Kjbs4</string>
+	<key>GCM_SENDER_ID</key>
+	<string>625967762187</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.org.webapp</string>
+	<key>PROJECT_ID</key>
+	<string>lokmart</string>
+	<key>STORAGE_BUCKET</key>
+	<string>lokmart.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:625967762187:ios:6776cb1a27d8f2e31eb00e</string>
+	<key>DATABASE_URL</key>
+	<string>https://lokmart-default-rtdb.firebaseio.com</string>
+</dict>
+</plist>

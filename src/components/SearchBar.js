@@ -13,8 +13,12 @@ import {
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {colors} from '../styles/colors';
 import {ScreenNames} from '../navigation/ScreenNames';
+import strings from '../config/Localization';
+import { useRtlContext } from 'react-native-easy-localization-and-rtl';
 
 const SearchBar = props => {
+  // const {RtlStyles}=useRtlContext()
+
   const [isFocus, setisFocus] = useState(false);
 
   return (
@@ -25,6 +29,7 @@ const SearchBar = props => {
         justifyContent: 'space-between',
         marginHorizontal: 20,
         // backgroundColor: 'blue',
+        // ...RtlStyles.containerRow,
       }}>
       <View
         style={{
@@ -36,6 +41,7 @@ const SearchBar = props => {
           borderColor: isFocus ? colors.primary_color : colors.grey,
           // backgroundColor: 'red',
           alignItems: 'center',
+          // ...RtlStyles.containerRow,
         }}>
         <Icon
           name="search"
@@ -51,10 +57,13 @@ const SearchBar = props => {
             setisFocus(false);
           }}
           onPressIn={props.onPress}
-          placeholder="Search..."
+          placeholder={`${strings.search}...`}
           placeholderTextColor={colors.soft_grey}
           returnKeyType={'search'}
-          style={styles.input}
+          style={{
+            ...styles.input,
+            // ...RtlStyles.text
+          }}
           value={props.txt}
           onChangeText={props.onSearch}
           onSubmitEditing={props.onSubmit}
@@ -63,14 +72,12 @@ const SearchBar = props => {
       <TouchableWithoutFeedback
         onPress={() => {
           {
-            props.home ?
-            props.navigation.navigate(ScreenNames.SearchScreen):
-            
-            props.navigation.navigate(ScreenNames.FilterScreen, {
-              onFilterPress: props.onFilter ? props.onFilter : () => {},
-            });
+            props.home
+              ? props.navigation.navigate(ScreenNames.SearchScreen)
+              : props.navigation.navigate(ScreenNames.FilterScreen, {
+                  onFilterPress: props.onFilter ? props.onFilter : () => {},
+                });
           }
-          
         }}>
         <View
           style={{
@@ -91,7 +98,7 @@ const SearchBar = props => {
 
 const styles = StyleSheet.create({
   input: {
-    //   flex: 1,
+      flex: 1,
     margin: 10,
     height: 50,
     fontFamily: 'Poppins-Regular',
@@ -100,6 +107,7 @@ const styles = StyleSheet.create({
     lineHeight: 24,
     color: colors.soft_grey,
     width: wp('53'),
+    textAlign:'left',
   },
 });
 

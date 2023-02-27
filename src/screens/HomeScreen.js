@@ -6,7 +6,9 @@ import {
   ScrollView,
   TouchableWithoutFeedback,
   ActivityIndicator,
-  Alert
+  Alert,
+  Platform,
+  I18nManager,
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {
@@ -16,10 +18,7 @@ import {
 import {getStatusBarHeight} from 'react-native-status-bar-height';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {colors} from '../styles/colors';
-import {
-  allGrocery,
-  banners,
-} from '../assets/data/data';
+import {allGrocery, banners} from '../assets/data/data';
 import GroceryCard from '../components/GroceryCard';
 import SearchBar from '../components/SearchBar';
 import {fonts} from '../styles/fonts';
@@ -28,9 +27,14 @@ import Carousel, {Pagination, ParallaxImage} from 'react-native-snap-carousel';
 import {ScreenNames} from '../navigation/ScreenNames';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import firestore from '@react-native-firebase/firestore';
+import strings from '../config/Localization';
+import {useRtlContext} from 'react-native-easy-localization-and-rtl';
 
-const Header = ({username,img}) => {
-  
+
+const Header = ({username, img}) => {
+  // const {RtlStyles} = useRtlContext();
+  // console.log(RtlStyles.text)
+
   return (
     <View
       style={{
@@ -39,23 +43,33 @@ const Header = ({username,img}) => {
         justifyContent: 'space-between',
         margin: 20,
         flex: 1,
+        // ...RtlStyles.containerRow,
       }}>
       <View style={{flex: 1}}>
-        <Text style={{...fonts.h1}} numberOfLines={1}>
-          Hello, {username}
+        <Text style={{...fonts.h1, 
+          // ...RtlStyles.text
+          }} numberOfLines={1}>
+          {strings.hello}, {username}
         </Text>
         <Text
           style={{
+            textAlign:'left',
             fontFamily: 'Poppins-Regular',
             fontSize: 14,
             fontWeight: '400',
             lineHeight: 21,
             color: colors.soft_grey,
+            // ...RtlStyles.text,
           }}>
-          Good morning.
+          {strings.gm}.
         </Text>
       </View>
-      <View style={{flexDirection: 'row', alignItems: 'center'}}>
+      <View
+        style={{
+          flexDirection: 'row',
+          alignItems: 'center',
+          // ...RtlStyles.containerRow,
+        }}>
         <View>
           <Icon name="bell-o" size={30} color={colors.black} />
           <View style={styles.IconBadge}>
@@ -63,12 +77,15 @@ const Header = ({username,img}) => {
           </View>
         </View>
         <View style={{width: 20}} />
-        {img=='' ? <ActivityIndicator /> :
-        <Image source={{uri: img}} style={styles.profileImg} />
-      }
+        {img == '' ? (
+          <ActivityIndicator />
+        ) : (
+          <Image source={{uri: img}} style={styles.profileImg} />
+        )}
       </View>
     </View>
-  );};
+  );
+};
 
 const PopularCard = ({item, onPress = () => {}}) => {
   const [Item, setitem] = useState(item);
@@ -205,20 +222,17 @@ const CategoryCard = ({item, onPress = () => {}}) => {
             marginBottom: 10,
           }}>
           {/* <Image source={item.image} style={styles.categoryImg} /> */}
-          {isLoading && (
-            <ActivityIndicator style={{top:50}}/>
-          ) }
-            <Image
-              onLoadStart={() => {
-                setisLoading(true);
-              }}
-              onLoadEnd={() => {
-                setisLoading(false);
-              }}
-              source={{uri: item.thumbnail}}
-              style={{...styles.categoryImg}}
-            />
-          
+          {isLoading && <ActivityIndicator style={{top: 50}} />}
+          <Image
+            onLoadStart={() => {
+              setisLoading(true);
+            }}
+            onLoadEnd={() => {
+              setisLoading(false);
+            }}
+            source={{uri: item.thumbnail}}
+            style={{...styles.categoryImg}}
+          />
         </View>
         <Text
           // ellipsizeMode='tail'
@@ -249,6 +263,8 @@ const CategoryCard = ({item, onPress = () => {}}) => {
 };
 
 const HomeScreen = props => {
+  // const {RtlStyles} = useRtlContext();
+
   // console.log(allGrocery[1])
   // console.log(getStatusBarHeight(), props.route.params.user);
   // const username = props.route.params.user;
@@ -256,6 +272,7 @@ const HomeScreen = props => {
   const [index, setindex] = useState(0);
   const [categoryList, setcategoryList] = useState([]);
   const [productList, setproductList] = useState([]);
+
 
   const [username, setusername] = useState('');
   const [img, setimg] = useState('');
@@ -274,21 +291,20 @@ const HomeScreen = props => {
     setproductList(jsonData.products);
   };
 
-const getUserDetails = async () => {
-  const user = JSON.parse(await AsyncStorage.getItem('USER'));  
-  firestore()
-    .collection('users')
-    .doc(user.id.toString())
-    .get()
-    .then(snapShot => {
-      
-      const data = snapShot.data();
-      
-      setusername(data.username);
-      setimg(data.image);
-    })
-    .catch(e => Alert.alert('Profile', e));
-};
+  const getUserDetails = async () => {
+    const user = JSON.parse(await AsyncStorage.getItem('USER'));
+    firestore()
+      .collection('users')
+      .doc(user.id.toString())
+      .get()
+      .then(snapShot => {
+        const data = snapShot.data();
+
+        setusername(data.username);
+        setimg(data.image);
+      })
+      .catch(e => Alert.alert('Profile', e));
+  };
 
   useEffect(() => {
     props.navigation.addListener('focus', () => {
@@ -302,7 +318,7 @@ const getUserDetails = async () => {
   return (
     <View style={styles.mainContainer}>
       <ScrollView showsVerticalScrollIndicator={false}>
-        <Header username={username} img={img}/>
+        <Header username={username} img={img} />
         <SearchBar
           {...props}
           onPress={() => {
@@ -317,7 +333,7 @@ const getUserDetails = async () => {
             hasParallaxImages={true}
             data={banners}
             sliderWidth={wp('100')}
-            itemWidth={wp('85')}
+            itemWidth={wp('80')}
             onSnapToItem={i => setindex(i)}
             renderItem={({item}, parallaxProps) => (
               <View
@@ -354,25 +370,35 @@ const getUserDetails = async () => {
               justifyContent: 'space-between',
               alignItems: 'center',
               marginHorizontal: 20,
+              // ...RtlStyles.containerRow,
             }}>
-            <Text style={fonts.h1}>Categories</Text>
+            <Text style={fonts.h1}>{strings.categories}</Text>
             <TouchableWithoutFeedback
               onPress={() => {
                 props.navigation.navigate(ScreenNames.CategoryScreen);
               }}>
-              <View style={{flexDirection: 'row', alignItems: 'center'}}>
+              <View
+                style={{
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  // ...RtlStyles.containerRow,
+                }}>
                 <Text
                   style={{
                     fontFamily: 'Poppins-Regular',
                     fontSize: 16,
                     fontWeight: '600',
-                    lineHeight: 20,
                     color: colors.solid_primary,
                   }}>
-                  Show all
+                  {strings.showAll}
                 </Text>
                 <View style={{width: 5}} />
-                <Icon name="play" color={colors.solid_primary} />
+                <Icon
+                  name="play"
+                  color={colors.solid_primary}
+                  // style={RtlStyles.flipHorizontal}
+                  style={{transform: [{scaleX: I18nManager.isRTL ? -1 : 1}]}}
+                />
               </View>
             </TouchableWithoutFeedback>
           </View>
@@ -405,25 +431,35 @@ const getUserDetails = async () => {
             justifyContent: 'space-between',
             alignItems: 'center',
             marginHorizontal: 20,
+            // ...RtlStyles.containerRow,
           }}>
-          <Text style={fonts.h1}>Products</Text>
+          <Text style={fonts.h1}>{strings.products}</Text>
           <TouchableWithoutFeedback
             onPress={() => {
               props.navigation.navigate(ScreenNames.ProductScreen);
             }}>
-            <View style={{flexDirection: 'row', alignItems: 'center'}}>
+            <View
+              style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+                // ...RtlStyles.containerRow,
+              }}>
               <Text
                 style={{
                   fontFamily: 'Poppins-Regular',
                   fontSize: 16,
                   fontWeight: '600',
-                  lineHeight: 20,
                   color: colors.solid_primary,
                 }}>
-                Show all
+                {strings.showAll}
               </Text>
               <View style={{width: 5}} />
-              <Icon name="play" color={colors.solid_primary} />
+              <Icon
+                name="play"
+                color={colors.solid_primary}
+                // style={RtlStyles.flipHorizontal}
+                style={{transform: [{scaleX: I18nManager.isRTL ? -1 : 1}]}}
+              />
             </View>
           </TouchableWithoutFeedback>
         </View>
@@ -451,6 +487,7 @@ const getUserDetails = async () => {
               justifyContent: 'space-between',
               alignItems: 'center',
               marginHorizontal: 20,
+              // ...RtlStyles.containerRow,
             }}>
             <Text
               style={{
@@ -459,25 +496,34 @@ const getUserDetails = async () => {
                 fontWeight: '700',
                 color: colors.dark,
               }}>
-              Popular Deals
+              {strings.popularDeals}
             </Text>
             <TouchableWithoutFeedback
               onPress={() => {
                 // navigation.navigate('');
               }}>
-              <View style={{flexDirection: 'row', alignItems: 'center'}}>
+              <View
+                style={{
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  // ...RtlStyles.containerRow,
+                }}>
                 <Text
                   style={{
                     fontFamily: 'Poppins-Regular',
                     fontSize: 16,
                     fontWeight: '600',
-                    lineHeight: 20,
                     color: colors.solid_primary,
                   }}>
-                  Show all
+                  {strings.showAll}
                 </Text>
                 <View style={{width: 5}} />
-                <Icon name="play" color={colors.solid_primary} />
+                <Icon
+                  name="play"
+                  color={colors.solid_primary}
+                  // style={RtlStyles.flipHorizontal}
+                  style={{transform: [{scaleX: I18nManager.isRTL ? -1 : 1}]}}
+                />
               </View>
             </TouchableWithoutFeedback>
           </View>
@@ -500,7 +546,13 @@ const getUserDetails = async () => {
           </View>
         </View>
         <View style={{marginHorizontal: 20}}>
-          <Text style={fonts.h1}>All Grocery</Text>
+          <Text
+            style={[
+              fonts.h1,
+              // RtlStyles.text
+            ]}>
+            {strings.allGrocery}
+          </Text>
           {items.map((item, index) =>
             index > 2 ? null : (
               <GroceryCard
@@ -527,11 +579,11 @@ const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
     backgroundColor: colors.white,
-    paddingTop: getStatusBarHeight(),
+    paddingTop: Platform.OS == 'ios' ? getStatusBarHeight() : 0,
   },
   profileImg: {
-    height: 55,
-    width: 55,
+    height: 50,
+    width: 50,
     borderRadius: 50,
   },
   IconBadge: {
@@ -571,7 +623,7 @@ const styles = StyleSheet.create({
     height: 80,
     width: 80,
     margin: 10,
-    resizeMode:'cover'
+    resizeMode: 'cover',
   },
 });
 

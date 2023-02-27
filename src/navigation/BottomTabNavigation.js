@@ -21,11 +21,16 @@ import {heightPercentageToDP} from 'react-native-responsive-screen-hooks';
 import MaskedView from '@react-native-masked-view/masked-view';
 import {fonts} from '../styles/fonts';
 import {getStatusBarHeight} from 'react-native-status-bar-height';
-import { ScreenNames } from './ScreenNames';
+import {ScreenNames} from './ScreenNames';
+import { useRtlContext } from 'react-native-easy-localization-and-rtl';
 
 const Tab = createBottomTabNavigator();
 
 const BottomTabNavigation = ({route}) => {
+
+  // const {RtlStyles}=useRtlContext()
+  // console.log('RtlStyles.flipHorizontal : ', RtlStyles.flipHorizontal);
+
   // console.log(route.params.user)
   return (
     <Tab.Navigator
@@ -34,7 +39,13 @@ const BottomTabNavigation = ({route}) => {
         headerShown: false,
         tabBarShowLabel: false,
         tabBarActiveTintColor: colors.primary_color,
-        tabBarStyle: {height: heightPercentageToDP('10')},
+        tabBarStyle: {
+          height: heightPercentageToDP('10'),
+          // ...RtlStyles.flipHorizontal,
+          // transform:[{scaleX:-1}]
+          // flexDirection: 'row-reverse',
+        },
+
         // tabBarIconStyle: {bottom: -25},
       }}>
       <Tab.Screen

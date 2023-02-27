@@ -7,6 +7,7 @@ import {
   StyleSheet,
   ActivityIndicator,
   Alert,
+  I18nManager,
 } from 'react-native';
 import OnboardingScreen2 from './src/screens/OnboardingScreen2';
 import SignUpScreen from './src/screens/auth/SignUpScreen';
@@ -28,6 +29,8 @@ import {Provider} from 'react-redux';
 import {store} from './src/redux/store/store';
 import PhoneNumSignInScreen from './src/screens/PhoneNumSignInScreen';
 import TodoScreen from './src/screens/realtimeDatabase/TodoScreen';
+import strings, {getLang} from './src/config/Localization';
+import { RTLProvider, useRtlContext } from 'react-native-easy-localization-and-rtl';
 
 const Stack = createNativeStackNavigator();
 
@@ -45,6 +48,8 @@ const AuthScreens = () => {
 };
 
 const App = () => {
+  // const {RtlStyles,isRtl,language,setLanguage}=useRtlContext()
+
   const [username, setusername] = useState(null);
   const [isLoading, setisLoading] = useState(false);
 
@@ -66,6 +71,8 @@ const App = () => {
   };
 
   useEffect(() => {
+    getinitLanguage();
+
     GoogleSignin.configure({
       webClientId:
         '625967762187-89g50n94paickqdk6oi5rsq8vsmdhvo3.apps.googleusercontent.com',
@@ -84,6 +91,25 @@ const App = () => {
 
     // isSignedIn();
   }, []);
+
+  const getinitLanguage = async () => {
+    // console.log('isrtl : : : ',isRtl)
+    console.log('I18nManager.isRTL ; ', I18nManager.isRTL);
+    console.log(strings.getLanguage())
+    const language = await getLang();
+    // if (language.isRTL) {
+    //   // I18nManager.allowRTL(true);
+    //   I18nManager.forceRTL(true);
+    // } else {
+    //   // I18nManager.allowRTL(false);
+    //   I18nManager.forceRTL(false);
+    // }
+    strings.setLanguage(language.lang);
+    console.log('lang : ', language.lang);
+    console.log('isRTL : ', language.isRtl);
+    // setLanguage(language.lang);
+    // console.log( strings.getLanguage())
+  };
 
   const getUser = async () => {
     // let user = JSON.parse(await AsyncStorage.getItem('USER'));
@@ -114,7 +140,7 @@ const App = () => {
 
   const isSignedIn = async () => {
     const isSignIn = await GoogleSignin.isSignedIn();
-    console.log('Google issignin',isSignIn)
+    console.log('Google issignin', isSignIn);
     if (isSignIn) {
       getCurrentUserInfo();
     } else {
@@ -144,19 +170,21 @@ const App = () => {
   }
 
   return (
+    <RTLProvider>
     <Provider store={store}>
       <View style={{flex: 1}}>
         {/* {console.log('render----')} */}
-        <StatusBar
+        {/* <StatusBar
           translucent
           backgroundColor="transparent"
           // barStyle="light-content"
-        />
+        /> */}
         <NavigationContainer>
           <Stack.Navigator
             screenOptions={{headerShown: false}}
-            // initialRouteName={username == 'logout' ? 'AuthScreen' : 'Home'}
-            initialRouteName={ScreenNames.TodoScreen}>
+            initialRouteName={username == 'logout' ? 'AuthScreen' : 'Home'}
+            // initialRouteName={ScreenNames.TodoScreen}
+          >
             <Stack.Screen
               name={ScreenNames.AuthScreen}
               component={AuthScreens}
@@ -212,11 +240,8 @@ const App = () => {
         </NavigationContainer>
       </View>
     </Provider>
+    </RTLProvider>
   );
 };
-
-const styles = StyleSheet.create({
-  header: {...fonts.h4},
-});
 
 export default App;

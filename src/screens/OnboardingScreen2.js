@@ -10,6 +10,7 @@ import CustomButton from '../components/CustomButton';
 import Onboarding from 'react-native-onboarding-swiper';
 import {fonts} from '../styles/fonts';
 import { ScreenNames } from '../navigation/ScreenNames';
+import strings from '../config/Localization';
 
 const OnboardingScreen2 = ({navigation}) => {
   return (
@@ -40,13 +41,13 @@ const OnboardingScreen2 = ({navigation}) => {
         showSkip={false}
         NextButtonComponent={({...props}) => (
           <View style={{width: wp('100'), bottom: 20}}>
-            <CustomButton title={'NEXT'} {...props} />
+            <CustomButton title={strings.next.toUpperCase()} {...props} />
           </View>
         )}
         DoneButtonComponent={() => (
           <View style={{width: wp('100'), bottom: 20}}>
             <CustomButton
-              title="GET STARTED"
+              title={strings.getStarted.toUpperCase()}
               onPress={() => {
                 navigation.navigate(ScreenNames.SigninScreen);
               }}
@@ -67,9 +68,8 @@ const OnboardingScreen2 = ({navigation}) => {
                 source={require('/Users/mac/Desktop/Projects/Lokmart/src/assets/images/illustration.png')}
               />
             ),
-            title: 'Welcome to LokMart! Grocery Applications',
-            subtitle:
-              'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed doeiusmod tempor incididunt ut labore',
+            title: strings.welcomeLokmart,
+            subtitle: strings.lorem,
           },
           {
             backgroundColor: 'transparent',
@@ -79,9 +79,8 @@ const OnboardingScreen2 = ({navigation}) => {
                 source={require('/Users/mac/Desktop/Projects/Lokmart/src/assets/images/illustration2.png')}
               />
             ),
-            title: 'Best Quality and Fast Delivery!',
-            subtitle:
-              'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed doeiusmod tempor incididunt ut labore',
+            title: strings.bestQltFastDel,
+            subtitle: strings.lorem,
           },
         ]}
       />

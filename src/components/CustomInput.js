@@ -11,8 +11,12 @@ import {colors} from '../styles/colors';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import { fonts } from '../styles/fonts';
+import { useRtlContext } from 'react-native-easy-localization-and-rtl';
 
 const CustomInput = (props) => {
+
+  // const {RtlStyles}=useRtlContext()
+
   const [visibility, setvisibility] = useState(false);
   const [isFocus, setIsFocus] = useState(false);
   return (
@@ -23,6 +27,7 @@ const CustomInput = (props) => {
               ...styles.input,
               borderColor: colors.primary_color,
               borderWidth: 2,
+              // ...RtlStyles.containerRow,
             }
           : styles.input
       }>
@@ -37,12 +42,12 @@ const CustomInput = (props) => {
           setIsFocus(!isFocus);
         }}
         style={{
-          ...fonts.h6,
           flex: 1,
+          ...fonts.h6,
+          // textAlign:'left',
           marginHorizontal: 10,
-          textAlign: 'left',
-          lineHeight: 24,
-        }}    
+          // ...RtlStyles.text,
+        }}
         secureTextEntry={props.passwordField && !visibility}
         value={props.value}
         onChangeText={props.onChangeText}

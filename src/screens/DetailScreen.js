@@ -169,7 +169,9 @@ const DetailScreen = props => {
               setindex(i);
             }}
             // data={[item.image, item.image, item.image]}
-            data={item.images}
+            data={
+              item.images ? item.images : [item.image, item.image, item.image]
+            }
             renderItem={({item}) => {
               return (
                 <>
@@ -191,7 +193,7 @@ const DetailScreen = props => {
                       marginVertical: 20,
                     }}
                     // source={item}
-                    source={{uri: item}}
+                    source={ {uri: item}}
                   />
                 </>
               );
@@ -358,16 +360,15 @@ const DetailScreen = props => {
           icon={'shopping-cart'}
           onPress={
             addItemToCart
-          //   () => {
-          //   // console.log({...item,cnt:cnt})
-          //   const data = {...item, cnt: cnt};
-          //   addItemToCart(data);
-          //   props.navigation.navigate(ScreenNames.ShoppingCartScreen, {
-          //     navi: true,
-          //   });
-          // }
-        }
-
+            //   () => {
+            //   // console.log({...item,cnt:cnt})
+            //   const data = {...item, cnt: cnt};
+            //   addItemToCart(data);
+            //   props.navigation.navigate(ScreenNames.ShoppingCartScreen, {
+            //     navi: true,
+            //   });
+            // }
+          }
         />
       </View>
     </>

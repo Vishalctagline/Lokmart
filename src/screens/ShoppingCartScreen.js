@@ -25,6 +25,8 @@ import {ScreenNames} from '../navigation/ScreenNames';
 import CustomHeader from '../components/CustomHeader';
 import {GlobalStyles} from '../styles/GlobalStyle';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {useRtlContext} from 'react-native-easy-localization-and-rtl';
+import strings from '../config/Localization';
 
 const ProductCard = props => {
   // const [cnt, setcnt] = useState(props.item.cnt);
@@ -213,6 +215,8 @@ const DetailView = ({detail, amount, color}) => (
 // };
 
 const ShoppingCartScreen = props => {
+  // const {RtlStyles}=useRtlContext()
+
   // console.log("NEW ITEM",props.route.params.newItem)
   const [user, setuser] = useState({});
   const [cartList, setcartList] = useState([]);
@@ -224,6 +228,7 @@ const ShoppingCartScreen = props => {
     ? props.route.params.newCart
     : null;
   console.log('newcart : ', newCart);
+
   const getCartList = async () => {
     let user = JSON.parse(await AsyncStorage.getItem('USER'));
     setuser(user);
@@ -277,8 +282,10 @@ const ShoppingCartScreen = props => {
 
   useEffect(() => {
     props.navigation.addListener('focus', () => {
-      console.log('focus render');
-      getCartList();
+      console.log('cartList length : ', cartList.length);
+      if (cartList.length == 0) {
+        getCartList();
+      }
     });
     // props.navigation.addListener('tabPress', () => {
     //    getCartList();
@@ -298,6 +305,7 @@ const ShoppingCartScreen = props => {
             justifyContent: 'space-between',
             backgroundColor: colors.white,
             marginTop: Platform.OS === 'android' ? getStatusBarHeight() : 0,
+            // ...RtlStyles.containerRow
           }}>
           <View
             style={{
@@ -317,7 +325,7 @@ const ShoppingCartScreen = props => {
               </>
             )}
 
-            <Text style={fonts.h4}>Shopping Cart</Text>
+            <Text style={fonts.h4}>{strings.shoppingCart}</Text>
           </View>
           <TouchableWithoutFeedback onPress={() => {}}>
             <Icon name="ellipsis-v" size={25} color={colors.black} />

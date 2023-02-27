@@ -14,6 +14,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import auth from '@react-native-firebase/auth';
 import {ScreenNames} from '../../navigation/ScreenNames';
+import strings from '../../config/Localization';
 
 const SignUpScreen = ({navigation, route}) => {
   const [usernameError, setusernameError] = useState('');
@@ -49,11 +50,11 @@ const SignUpScreen = ({navigation, route}) => {
         .createUserWithEmailAndPassword(email, password)
         .then(res => {
           res.user.sendEmailVerification();
-          Alert.alert('Sign Up', 'Email has been sent !',);
+          Alert.alert('Sign Up', 'Email has been sent !');
           console.log('create User With Email And Password : ', res);
           console.log('Response : ', res.user);
-          navigation.goBack()
-          
+          navigation.goBack();
+
           // AsyncStorage.setItem('USER', JSON.stringify(res.user));
           // navigation.replace(ScreenNames.HomeTab, {
           //   user: res.user.displayName ? res.user.displayName : 'User',
@@ -100,7 +101,7 @@ const SignUpScreen = ({navigation, route}) => {
               top: hp('15'),
               letterSpacing: 6,
             }}>
-            Grocery App
+            {strings.groceryApp}
           </Text>
         </View>
         <View
@@ -142,7 +143,7 @@ const SignUpScreen = ({navigation, route}) => {
             />
             {emailError && <Text style={styles.errorTxt}>{emailError}</Text>}
             <CustomInput
-              placeholder={'Enter password'}
+              placeholder={strings.enterPassword}
               value={password}
               prefix={'lock'}
               passwordField={true}
@@ -237,11 +238,13 @@ const SignUpScreen = ({navigation, route}) => {
               />
               <Text
                 style={{
+                  flex: 1,
                   fontFamily: 'Poppins-Regular',
                   color: colors.soft_grey,
                   fontWeight: '500',
                   fontSize: 16,
                   lineHeight: 22,
+                  textAlign: 'left',
                 }}>
                 By tapping “Sign Up” you accept our{' '}
                 <Text
@@ -267,30 +270,23 @@ const SignUpScreen = ({navigation, route}) => {
                 </Text>
               </Text>
             </View>
-            <Text
-              style={{
-                fontFamily: 'Poppins-Regular',
-                fontSize: 16,
-                fontWeight: '400',
-                lineHeight: 22,
-                color: colors.soft_grey,
-                alignSelf: 'center',
-              }}>
-              Already have account? {''}
+            <View style={{alignSelf: 'center', flexDirection: 'row'}}>
+              <Text
+                style={{
+                  ...fonts.h6,
+                  color: colors.soft_grey,
+                  margin: 2,
+                }}>
+                Already have account? {''}
+              </Text>
               <Text
                 onPress={() => {
                   navigation.pop();
                 }}
-                style={{
-                  fontFamily: 'Poppins-Regular',
-                  fontSize: 16,
-                  fontWeight: '600',
-                  lineHeight: 22,
-                  color: colors.primary_color,
-                }}>
+                style={{...fonts.h7, color: colors.primary_color, margin: 2}}>
                 Login
               </Text>
-            </Text>
+            </View>
           </KeyboardAwareScrollView>
         </View>
       </View>
@@ -317,6 +313,7 @@ const styles = StyleSheet.create({
   },
   errorTxt: {
     color: 'red',
+    textAlign: 'left',
   },
 });
 

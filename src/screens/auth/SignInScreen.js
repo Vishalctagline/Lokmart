@@ -41,6 +41,7 @@ import {
 
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
+import strings from '../../config/Localization';
 
 const SignInScreen = ({navigation}) => {
   const [userList, setuserList] = useState([]);
@@ -76,10 +77,10 @@ const SignInScreen = ({navigation}) => {
           .get();
         console.log('usersDocument GET ; ', usersDocument);
         if (usersDocument.exists) {
-          const data=usersDocument.data()
+          const data = usersDocument.data();
           console.log('DATA exists : ', data);
           await AsyncStorage.setItem('USER', JSON.stringify(data));
-          navigation.replace(ScreenNames.HomeTab, );
+          navigation.replace(ScreenNames.HomeTab);
         } else {
           firestore()
             .collection('users')
@@ -386,8 +387,9 @@ const SignInScreen = ({navigation}) => {
               alignSelf: 'center',
               top: hp('15'),
               letterSpacing: 6,
+              textAlign: 'left',
             }}>
-            Grocery App
+            {strings.groceryApp}
           </Text>
         </View>
         <View
@@ -399,7 +401,7 @@ const SignInScreen = ({navigation}) => {
             position: 'absolute',
           }}>
           <KeyboardAwareScrollView scrollEnabled enableOnAndroid={true}>
-            <Text style={fonts.h3}>Welcome back</Text>
+            <Text style={fonts.h3}>{strings.welcomeBack}</Text>
             <View style={{height: 10}} />
             <Text
               style={{
@@ -408,14 +410,14 @@ const SignInScreen = ({navigation}) => {
                 fontSize: 14,
                 lineHeight: 22,
                 color: colors.soft_grey,
+                textAlign: 'left',
               }}>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor
+              {strings.lorem}
             </Text>
             <View style={{height: 20}} />
             <CustomInput
               keyboardType={'email-address'}
-              placeholder={'Enter username / e-mail address'}
+              placeholder={strings.enterUsernameEmail}
               value={username}
               prefix={'user'}
               onChangeText={txt => {
@@ -424,7 +426,7 @@ const SignInScreen = ({navigation}) => {
             />
 
             <CustomInput
-              placeholder={'Enter password'}
+              placeholder={strings.enterPassword}
               value={password}
               prefix={'lock'}
               passwordField={true}
@@ -439,7 +441,7 @@ const SignInScreen = ({navigation}) => {
               />
             ) : (
               <CustomButton
-                title={'SIGN IN'}
+                title={strings.signIn.toString().toUpperCase()}
                 onPress={async () => {
                   if (username == '' && password == '') {
                     Alert.alert('Sign In', 'Both fields are empty !');
@@ -474,24 +476,25 @@ const SignInScreen = ({navigation}) => {
               }}
             /> */}
             <Text style={{alignSelf: 'center', ...fonts.h6, marginVertical: 2}}>
-              OR
+              {strings.or}
             </Text>
-            <Text
-              style={{
-                alignSelf: 'center',
-                ...fonts.h6,
-                color: colors.soft_grey,
-                marginVertical: 2,
-              }}>
-              Signin with{' '}
+            <View style={{alignSelf: 'center', flexDirection: 'row'}}>
               <Text
-                style={{...fonts.h7, color: colors.primary_color}}
+                style={{
+                  ...fonts.h6,
+                  color: colors.soft_grey,
+                  margin: 2,
+                }}>
+                {strings.signInWith}
+              </Text>
+              <Text
+                style={{...fonts.h7, color: colors.primary_color, margin: 2}}
                 onPress={() => {
                   navigation.navigate(ScreenNames.PhoneNumSignInScreen);
                 }}>
-                Phone Number
+                {strings.phoneNumber}
               </Text>
-            </Text>
+            </View>
             <View
               style={{
                 flexDirection: 'row',
@@ -578,7 +581,7 @@ const SignInScreen = ({navigation}) => {
                     fontSize: 16,
                     lineHeight: 22,
                   }}>
-                  Keep Sign In
+                    {`${strings.keep} ${strings.signIn}`}
                 </Text>
               </View>
               <Text
@@ -590,33 +593,26 @@ const SignInScreen = ({navigation}) => {
                   textDecorationLine: 'underline',
                   color: colors.primary_color,
                 }}>
-                Forgot Password?
+                {strings.forgotPassword}
               </Text>
             </View>
-            <Text
-              style={{
-                fontFamily: 'Poppins-Regular',
-                fontSize: 16,
-                fontWeight: '400',
-                lineHeight: 22,
-                color: colors.soft_grey,
-                alignSelf: 'center',
-              }}>
-              Don’t have an account? {''}
+            <View style={{alignSelf: 'center', flexDirection: 'row'}}>
+              <Text
+                style={{
+                  ...fonts.h6,
+                  color: colors.soft_grey,
+                  margin: 2,
+                }}>
+                {strings.dontHaveAc} {''}
+              </Text>
               <Text
                 onPress={() => {
                   navigation.navigate(ScreenNames.SignupScreen);
                 }}
-                style={{
-                  fontFamily: 'Poppins-Regular',
-                  fontSize: 16,
-                  fontWeight: '600',
-                  lineHeight: 22,
-                  color: colors.primary_color,
-                }}>
-                Sign Up
+                style={{...fonts.h7, color: colors.primary_color, margin: 2}}>
+                {strings.signUp}
               </Text>
-            </Text>
+            </View>
           </KeyboardAwareScrollView>
         </View>
       </View>

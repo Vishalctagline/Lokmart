@@ -7,8 +7,8 @@ import {
 import { colors } from '../styles/colors';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { fonts } from '../styles/fonts';
-import { onPress } from 'deprecated-react-native-prop-types/DeprecatedTextPropTypes';
 import { ScreenNames } from '../navigation/ScreenNames';
+import { useRtlContext } from 'react-native-easy-localization-and-rtl';
 
 
 const FavoriteIcon=({isFav,onPress})=>{
@@ -30,6 +30,9 @@ const FavoriteIcon=({isFav,onPress})=>{
 }
 
 const GroceryCard = (props) => {
+
+  // const {RtlStyles}=useRtlContext()
+
   // let item=props.item
   const [error, seterror] = useState(false)
   // const [item, setitem] = useState(props.item);
@@ -52,6 +55,7 @@ const GroceryCard = (props) => {
           // backgroundColor: 'blue',
           marginVertical: 15,
           flexDirection: 'row',
+          // ...RtlStyles.containerRow,
         }}>
         <View style={{}}>
           <Image
@@ -91,6 +95,7 @@ const GroceryCard = (props) => {
                   fontWeight: '700',
                   lineHeight: 18,
                   color: colors.white,
+                  textAlign:'left'
                 }}>
                 {props.item.discount}% OFF
               </Text>
@@ -102,16 +107,23 @@ const GroceryCard = (props) => {
           style={{
             flex: 1,
             // backgroundColor: 'yellow',
-            marginLeft: 20,
+            marginHorizontal: 20,
             justifyContent: 'space-evenly',
           }}>
           <Text
             // numberOfLines={1}
-            style={fonts.h5}>
+            style={[fonts.h5,
+            // RtlStyles.text
+            ]}>
             {/* {item.name} */}
             {props.item.title}
           </Text>
-          <View style={{flexDirection: 'row', alignItems: 'center'}}>
+          <View
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              // ...RtlStyles.containerRow,
+            }}>
             <View
               style={{
                 borderWidth: 1,
@@ -121,6 +133,7 @@ const GroceryCard = (props) => {
                 alignItems: 'center',
                 justifyContent: 'space-evenly',
                 borderColor: '#B8BBC6',
+                // ...RtlStyles.containerRow,
               }}>
               <Icon name="star" color={colors.ratingStart} />
               <Text
@@ -130,6 +143,7 @@ const GroceryCard = (props) => {
                   fontWeight: '600',
                   lineHeight: 18,
                   color: colors.dark,
+                  // ...RtlStyles.text,
                 }}>
                 {props.item.rate}
               </Text>
@@ -142,17 +156,20 @@ const GroceryCard = (props) => {
                 fontWeight: '500',
                 lineHeight: 18,
                 color: colors.primary_color,
+                // ...RtlStyles.text,
               }}>
               {props.item.rating} Ratings
             </Text>
           </View>
           <Text
             style={{
+              textAlign:'left',
               fontFamily: 'Poppins-Regular',
               fontSize: 16,
               fontWeight: '600',
               // lineHeight: 18,
               color: colors.dark,
+              // ...RtlStyles.text,
             }}>
             ${props.item.price}
           </Text>
@@ -170,6 +187,7 @@ const GroceryCard = (props) => {
                 flexDirection: 'row',
                 alignItems: 'center',
                 marginVertical: 5,
+                // ...RtlStyles.containerRow,
               }}>
               <Image
                 style={{height: 20, width: 20}}

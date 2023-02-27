@@ -9,9 +9,14 @@ import {GlobalStyles} from '../styles/GlobalStyle';
 import SearchBar from '../components/SearchBar';
 import {ScreenNames} from '../navigation/ScreenNames';
 import { fonts } from '../styles/fonts';
+import strings from '../config/Localization';
+// import { useRtlContext } from 'react-native-easy-localization-and-rtl';
 
 const WishlistsScreen = props => {
+
   // console.log(favList)
+
+  // const {RtlStyles}=useRtlContext()
 
   const [wishlistItemList, setwishlist] = useState([]);
   const [isSearch, setisSearch] = useState(false);
@@ -20,7 +25,7 @@ const WishlistsScreen = props => {
 
   useEffect(() => {
     props.navigation.addListener('focus', () => {
-      console.log('on focus')
+      // console.log('on focus')
       // settxt('')
       setwishlist(allGrocery.filter(item => item.isFavorite));
       // console.log('render on focus');
@@ -29,10 +34,10 @@ const WishlistsScreen = props => {
       settxt('');
       setisSearch(false)
       setwishlist(allGrocery.filter(item => item.isFavorite));
-      console.log('render on tabpress');
+      // console.log('render on tabpress');
     });
     if (txt != '') {
-      console.log('txt isn\'t empty')
+      // console.log('txt isn\'t empty')
       setsearchedList(
         wishlistItemList.filter(
           item => item.name.toLowerCase().includes(txt.toLowerCase()),
@@ -45,7 +50,7 @@ const WishlistsScreen = props => {
       );
       // console.log(searchedList);
     } else {
-      console.log("txt is empty");
+      // console.log("txt is empty");
       setsearchedList([]);
     }
     
@@ -59,6 +64,7 @@ const WishlistsScreen = props => {
           flexDirection: 'row',
           justifyContent: 'space-between',
           alignItems: 'center',
+          // ...RtlStyles.containerRow
         }}>
         <Text
           style={{
@@ -68,7 +74,7 @@ const WishlistsScreen = props => {
             lineHeight: 33,
             color: colors.dark,
           }}>
-          Wishlists
+          {strings.wishList}
         </Text>
         <Icon
           name="search"

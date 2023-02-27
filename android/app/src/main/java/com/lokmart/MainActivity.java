@@ -1,5 +1,7 @@
 package com.lokmart;
 
+// io.invertase.firebase.messaging.ReactNativeFirebaseMessagingPackage;
+
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivityDelegate;
 import com.facebook.react.ReactRootView;

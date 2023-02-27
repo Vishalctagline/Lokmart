@@ -1,5 +1,8 @@
 package com.lokmart;
 
+import com.dieam.reactnativepushnotification.ReactNativePushNotificationPackage;  // <--- Import Package
+
+
 import android.app.Application;
 import android.content.Context;
 import com.facebook.react.PackageList;
@@ -12,6 +15,11 @@ import com.facebook.soloader.SoLoader;
 import com.lokmart.newarchitecture.MainApplicationReactNativeHost;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
+
+import io.invertase.firebase.messaging.ReactNativeFirebaseMessagingPackage;
+import com.babisoft.ReactNativeLocalization.ReactNativeLocalizationPackage; // <--- import
+
+import com.facebook.react.modules.i18nmanager.I18nUtil;
 
 public class MainApplication extends Application implements ReactApplication {
 
@@ -28,6 +36,9 @@ public class MainApplication extends Application implements ReactApplication {
           List<ReactPackage> packages = new PackageList(this).getPackages();
           // Packages that cannot be autolinked yet can be added manually here, for example:
           // packages.add(new MyReactNativePackage());
+//            packages.add(new ReactNativePushNotificationPackage());
+//          packages.add(new ReactNativeFirebaseMessagingPackage());
+              // packages.add(new ReactNativeLocalizationPackage())
           return packages;
         }
 
@@ -56,6 +67,9 @@ public class MainApplication extends Application implements ReactApplication {
     ReactFeatureFlags.useTurboModules = BuildConfig.IS_NEW_ARCHITECTURE_ENABLED;
     SoLoader.init(this, /* native exopackage */ false);
     initializeFlipper(this, getReactNativeHost().getReactInstanceManager());
+    I18nUtil sharedI18nUtilInstance = I18nUtil.getInstance();
+    // sharedI18nUtilInstance.forceRTL(this,true);
+    sharedI18nUtilInstance.allowRTL(this, true);
   }
 
   /**
