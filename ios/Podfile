@@ -10,7 +10,7 @@ install! 'cocoapods', :deterministic_uuids => false
 
 target 'Lokmart' do
   
-  static_framework = true
+  # static_framework = true
   use_frameworks!
   use_modular_headers!
   

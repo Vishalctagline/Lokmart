@@ -32,6 +32,7 @@ import TodoScreen from './src/screens/realtimeDatabase/TodoScreen';
 import strings, {getLang} from './src/config/Localization';
 import { RTLProvider, useRtlContext } from 'react-native-easy-localization-and-rtl';
 import MapScreen from './src/screens/MapScreen';
+import AminationScreens from './src/screens/animationScreens';
 
 const Stack = createNativeStackNavigator();
 
@@ -184,9 +185,9 @@ const App = () => {
           <Stack.Navigator
             screenOptions={{headerShown: false}}
             // initialRouteName={username == 'logout' ? 'AuthScreen' : 'Home'}
-            initialRouteName={ScreenNames.MapScreen}
+            // initialRouteName={ScreenNames.MapScreen}
             // initialRouteName={ScreenNames.TodoScreen}
-          >
+            initialRouteName={ScreenNames.AnimationScreens}>
             <Stack.Screen
               name={ScreenNames.AuthScreen}
               component={AuthScreens}
@@ -240,6 +241,10 @@ const App = () => {
             />
 
             <Stack.Screen name={ScreenNames.MapScreen} component={MapScreen} />
+            <Stack.Screen
+              name={ScreenNames.AnimationScreens}
+              component={AminationScreens}
+            />
           </Stack.Navigator>
         </NavigationContainer>
       </View>
