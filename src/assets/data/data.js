@@ -493,6 +493,12 @@ export const orderList = [
 
 export const locations = [
   {
+    id: 0,
+    title: 'Ludhiāna',
+    latitude: 30.9083,
+    longitude: 75.8486,
+  },
+  {
     id: 1,
     title: 'Delhi',
     latitude: 28.66,
@@ -515,11 +521,5 @@ export const locations = [
     title: 'Surat',
     latitude: 21.17,
     longitude: 72.83,
-  },
-  {
-    id: 5,
-    title: 'Ludhiāna',
-    latitude: 30.9083,
-    longitude: 75.8486,
   },
 ];
