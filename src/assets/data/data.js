@@ -489,3 +489,37 @@ export const orderList = [
 //     image: require('../images/fruits/coconut.png'),
 //   },
 // ];
+
+
+export const locations = [
+  {
+    id: 1,
+    title: 'Delhi',
+    latitude: 28.66,
+    longitude: 77.23,
+  },
+  {
+    id: 2,
+    title: 'Mumbai',
+    latitude: 18.9667,
+    longitude: 72.8333,
+  },
+  {
+    id: 3,
+    title: 'Chennai',
+    latitude: 13.0825,
+    longitude: 80.275,
+  },
+  {
+    id: 4,
+    title: 'Surat',
+    latitude: 21.17,
+    longitude: 72.83,
+  },
+  {
+    id: 5,
+    title: 'Ludhiāna',
+    latitude: 30.9083,
+    longitude: 75.8486,
+  },
+];

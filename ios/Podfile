@@ -8,11 +8,22 @@ platform :ios, 13.0
 
 install! 'cocoapods', :deterministic_uuids => false
 
-target 'Lokmart' do  
+target 'Lokmart' do
+  
+  static_framework = true
   use_frameworks!
   use_modular_headers!
   
+  
+  rn_maps_path = '../node_modules/react-native-maps'
+  pod 'react-native-maps', path: rn_maps_path
+  pod 'react-native-google-maps', :path => rn_maps_path
+  pod 'GoogleMaps'
+  pod 'Google-Maps-iOS-Utils'
+  
   config = use_native_modules!
+
+
 
   # Flags change depending on the env values.
   flags = get_default_flags()
@@ -37,10 +48,19 @@ target 'Lokmart' do
     :app_path => "#{Pod::Config.instance.installation_root}/.."
   )
 
+
+  
+  
   target 'LokmartTests' do
     inherit! :complete
     # Pods for testing
   end
+  
+  # pre_install do |installer|
+    # # copied from https://github.com/CocoaPods/CocoaPods/issues/2926
+    # # workaround for https://github.com/CocoaPods/CocoaPods/issues/3289
+    # def installer.verify_no_static_framework_transitive_dependencies; end
+  # end
 
   post_install do |installer|
     installer.pods_project.targets.each do |target|

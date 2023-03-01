@@ -20,4 +20,5 @@ export const ScreenNames = {
   AddNewCardScreen: 'AddNewCardScreen',
 
   TodoScreen: 'TodoScreen',
+  MapScreen:'MapScreen',
 };

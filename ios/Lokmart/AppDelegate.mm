@@ -17,6 +17,10 @@
 
 #import <React/RCTI18nUtil.h>
 
+#import <GoogleMaps/GoogleMaps.h>
+
+
+
 
 #if RCT_NEW_ARCH_ENABLED
 #import <React/CoreModulesPlugins.h>
@@ -85,7 +89,10 @@ didReceiveNotificationResponse:(UNNotificationResponse *)response
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
   
+  [GMSServices provideAPIKey:@"AIzaSyCM5c9xL4o4KENma2knCl7bbASgss0j01c"];
 
+
+  
   [[RCTI18nUtil sharedInstance] allowRTL:YES];
   
   RCTAppSetupPrepareApp(application);

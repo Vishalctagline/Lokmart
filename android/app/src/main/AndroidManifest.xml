@@ -17,6 +17,11 @@
         <meta-data android:name="com.facebook.sdk.ClientToken" android:value="@string/facebook_client_token"/>
 
 
+        <!-- Maps -->
+        <meta-data  
+            android:name="com.google.android.geo.API_KEY"  
+            android:value="AIzaSyCM5c9xL4o4KENma2knCl7bbASgss0j01c"/>  
+
         <!-- Push Notification -->        
         <meta-data  android:name="com.dieam.reactnativepushnotification.notification_foreground"
             android:value="false"/>

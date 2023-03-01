@@ -31,6 +31,7 @@ import PhoneNumSignInScreen from './src/screens/PhoneNumSignInScreen';
 import TodoScreen from './src/screens/realtimeDatabase/TodoScreen';
 import strings, {getLang} from './src/config/Localization';
 import { RTLProvider, useRtlContext } from 'react-native-easy-localization-and-rtl';
+import MapScreen from './src/screens/MapScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -170,7 +171,7 @@ const App = () => {
   }
 
   return (
-    <RTLProvider>
+    // <RTLProvider>
     <Provider store={store}>
       <View style={{flex: 1}}>
         {/* {console.log('render----')} */}
@@ -182,7 +183,8 @@ const App = () => {
         <NavigationContainer>
           <Stack.Navigator
             screenOptions={{headerShown: false}}
-            initialRouteName={username == 'logout' ? 'AuthScreen' : 'Home'}
+            // initialRouteName={username == 'logout' ? 'AuthScreen' : 'Home'}
+            initialRouteName={ScreenNames.MapScreen}
             // initialRouteName={ScreenNames.TodoScreen}
           >
             <Stack.Screen
@@ -236,11 +238,13 @@ const App = () => {
               name={ScreenNames.TodoScreen}
               component={TodoScreen}
             />
+
+            <Stack.Screen name={ScreenNames.MapScreen} component={MapScreen} />
           </Stack.Navigator>
         </NavigationContainer>
       </View>
     </Provider>
-    </RTLProvider>
+    // </RTLProvider>
   );
 };
 

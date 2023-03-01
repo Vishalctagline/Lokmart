@@ -15,4 +15,8 @@ if (settings.hasProperty("newArchEnabled") && settings.newArchEnabled == "true")
     //localization
     include ':react-native-localization', ':app'
     project(':react-native-localization').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-localization/android')
+
+    //Map
+    include ':react-native-maps'  
+    project(':react-native-maps').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-maps/lib/android')  
 }
