@@ -25,6 +25,9 @@
 		044A3BD329470B020055FF30 /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 044A3BC329470B020055FF30 /* EvilIcons.ttf */; };
 		044A3BD429470B020055FF30 /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 044A3BC429470B020055FF30 /* SimpleLineIcons.ttf */; };
 		044A3BD529470B020055FF30 /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 044A3BC529470B020055FF30 /* MaterialIcons.ttf */; };
+		04770CD529AF57270072B51E /* GoogleMaps.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04BE2A9129ADF6EB005E0844 /* GoogleMaps.xcframework */; };
+		04770CD629AF57270072B51E /* GoogleMapsBase.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04BE2A9329ADF6EB005E0844 /* GoogleMapsBase.xcframework */; };
+		04770CD729AF57270072B51E /* GoogleMapsCore.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04BE2A9529ADF6EB005E0844 /* GoogleMapsCore.xcframework */; };
 		04AE947229770AAA0057EBB7 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04AE947129770AAA0057EBB7 /* Bolts.framework */; };
 		04AE947429770ABE0057EBB7 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04AE947329770ABD0057EBB7 /* FBSDKCoreKit.framework */; };
 		04AE947629770ACD0057EBB7 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04AE947529770ACD0057EBB7 /* FBSDKLoginKit.framework */; };
@@ -148,6 +151,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04770CD529AF57270072B51E /* GoogleMaps.xcframework in Frameworks */,
+				04770CD629AF57270072B51E /* GoogleMapsBase.xcframework in Frameworks */,
+				04770CD729AF57270072B51E /* GoogleMapsCore.xcframework in Frameworks */,
 				65630CD8181071950BBA1D55 /* Pods_Lokmart.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -13,10 +13,11 @@ import MapView, {
   Marker,
   Overlay,
   PROVIDER_GOOGLE,
+  Polygon,
   Polyline,
   UrlTile,
 } from 'react-native-maps';
-import MapViewDirections from "react-native-maps-directions";
+import MapViewDirections from 'react-native-maps-directions';
 import {useState} from 'react';
 import CustomCallout from '../components/CustomCallout';
 import CustomMarker from '../components/CustomMarker';
@@ -54,6 +55,8 @@ const MapScreen = () => {
   const [latitude1, setlatitude1] = useState(0);
   const [longitude1, setlongitude1] = useState(0);
   const [customStyle, setcustomStyle] = useState(standardStyle);
+
+  const [polygonArray, setpolygonArray] = useState([]);
 
   useEffect(() => {
     setinitRegion({
@@ -94,6 +97,15 @@ const MapScreen = () => {
         // initialRegion={initRegion}
         style={{flex: 1}}
         region={initRegion}
+        onPress={e => {
+          setpolygonArray([
+            ...polygonArray,
+            {
+              latitude: e.nativeEvent.coordinate.latitude,
+              longitude: e.nativeEvent.coordinate.longitude,
+            },
+          ]);
+        }}
         // onRegionChangeComplete={(reg)=>console.log(reg)}
         // onPoiClick={e => {
         //   console.log(e.nativeEvent);
@@ -157,7 +169,6 @@ const MapScreen = () => {
           maximumZ={0}
         /> */}
 
-
         {/* <Overlay
           bounds={[
             [18.9667, 72.8333],
@@ -166,10 +177,19 @@ const MapScreen = () => {
           image={require('../assets/images/noImg.png')}
         /> */}
 
-        <MapViewDirections
+        {/* <MapViewDirections
           apikey="AIzaSyCM5c9xL4o4KENma2knCl7bbASgss0j01c"
           destination={{latitude: 30.9083, longitude: 75.8486}}
           origin={{latitude: 18.9667, longitude: 72.8333}}
+        /> */}
+
+        <Polygon
+          coordinates={
+            polygonArray.length == 0
+              ? [{latitude: 0, longitude: 0}]
+              : polygonArray
+          }
+          fillColor='blue'
         />
       </MapView>
       <ScrollView
@@ -216,7 +236,7 @@ const MapScreen = () => {
           itemWidth={wp('80')}
         />
       </View>
-      <Button
+      {/* <Button
         title={'Google api'}
         onPress={async () => {
           const res = await fetch(
@@ -225,7 +245,7 @@ const MapScreen = () => {
           const json = await res.json();
           console.log('res ; ', json);
         }}
-      />
+      /> */}
     </View>
     // </SafeAreaView>
   );
