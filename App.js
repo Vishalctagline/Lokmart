@@ -33,6 +33,8 @@ import strings, {getLang} from './src/config/Localization';
 import { RTLProvider, useRtlContext } from 'react-native-easy-localization-and-rtl';
 import MapScreen from './src/screens/MapScreen';
 import AminationScreens from './src/screens/animationScreens';
+import AnimatedProfileScreen from './src/screens/aminatedProfileScreen/AnimatedProfileScreen';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 const Stack = createNativeStackNavigator();
 
@@ -174,80 +176,92 @@ const App = () => {
   return (
     // <RTLProvider>
     <Provider store={store}>
-      <View style={{flex: 1}}>
-        {/* {console.log('render----')} */}
-        {/* <StatusBar
+      <GestureHandlerRootView style={{flex: 1}}>
+        <View style={{flex: 1}}>
+          {/* {console.log('render----')} */}
+          {/* <StatusBar
           translucent
           backgroundColor="transparent"
           // barStyle="light-content"
         /> */}
-        <NavigationContainer>
-          <Stack.Navigator
-            screenOptions={{headerShown: false}}
-            // initialRouteName={username == 'logout' ? 'AuthScreen' : 'Home'}
-            // initialRouteName={ScreenNames.MapScreen}
-            // initialRouteName={ScreenNames.TodoScreen}
-            initialRouteName={ScreenNames.AnimationScreens}>
-            <Stack.Screen
-              name={ScreenNames.AuthScreen}
-              component={AuthScreens}
-            />
+          <NavigationContainer>
+            <Stack.Navigator
+              screenOptions={{headerShown: false}}
+              // initialRouteName={username == 'logout' ? 'AuthScreen' : 'Home'}
+              initialRouteName={ScreenNames.MapScreen}
+              // initialRouteName={ScreenNames.TodoScreen}
+              // initialRouteName={ScreenNames.AnimationScreens}
+              // initialRouteName={ScreenNames.AnimatedProfileScreen}
+              >
+              <Stack.Screen
+                name={ScreenNames.AuthScreen}
+                component={AuthScreens}
+              />
 
-            <Stack.Screen
-              initialParams={{user: username}}
-              name={ScreenNames.HomeTab}
-              component={BottomTabNavigation}
-            />
-            <Stack.Screen
-              name={ScreenNames.CategoryScreen}
-              component={CategoryScreen}
-            />
-            <Stack.Screen
-              name={ScreenNames.ProductScreen}
-              component={ProductScreen}
-            />
-            <Stack.Screen
-              name={ScreenNames.DetailScreen}
-              component={DetailScreen}
-            />
-            <Stack.Screen
-              name={ScreenNames.SearchScreen}
-              component={SearchScreen}
-            />
-            <Stack.Screen
-              name={ScreenNames.FilterScreen}
-              component={FilterScreen}
-            />
-            <Stack.Screen
-              name={ScreenNames.ShoppingCartScreen}
-              component={ShoppingCartScreen}
-            />
-            <Stack.Screen
-              name={ScreenNames.ShoppingAddressScreen}
-              component={ShoppingAddressScreen}
-            />
-            <Stack.Screen
-              name={ScreenNames.AddNewCardScreen}
-              component={AddNewCardScreen}
-            />
-            <Stack.Screen
-              name={ScreenNames.PhoneNumSignInScreen}
-              component={PhoneNumSignInScreen}
-            />
+              <Stack.Screen
+                initialParams={{user: username}}
+                name={ScreenNames.HomeTab}
+                component={BottomTabNavigation}
+              />
+              <Stack.Screen
+                name={ScreenNames.CategoryScreen}
+                component={CategoryScreen}
+              />
+              <Stack.Screen
+                name={ScreenNames.ProductScreen}
+                component={ProductScreen}
+              />
+              <Stack.Screen
+                name={ScreenNames.DetailScreen}
+                component={DetailScreen}
+              />
+              <Stack.Screen
+                name={ScreenNames.SearchScreen}
+                component={SearchScreen}
+              />
+              <Stack.Screen
+                name={ScreenNames.FilterScreen}
+                component={FilterScreen}
+              />
+              <Stack.Screen
+                name={ScreenNames.ShoppingCartScreen}
+                component={ShoppingCartScreen}
+              />
+              <Stack.Screen
+                name={ScreenNames.ShoppingAddressScreen}
+                component={ShoppingAddressScreen}
+              />
+              <Stack.Screen
+                name={ScreenNames.AddNewCardScreen}
+                component={AddNewCardScreen}
+              />
+              <Stack.Screen
+                name={ScreenNames.PhoneNumSignInScreen}
+                component={PhoneNumSignInScreen}
+              />
 
-            <Stack.Screen
-              name={ScreenNames.TodoScreen}
-              component={TodoScreen}
-            />
+              <Stack.Screen
+                name={ScreenNames.TodoScreen}
+                component={TodoScreen}
+              />
 
-            <Stack.Screen name={ScreenNames.MapScreen} component={MapScreen} />
-            <Stack.Screen
-              name={ScreenNames.AnimationScreens}
-              component={AminationScreens}
-            />
-          </Stack.Navigator>
-        </NavigationContainer>
-      </View>
+              <Stack.Screen
+                name={ScreenNames.MapScreen}
+                component={MapScreen}
+              />
+
+              <Stack.Screen
+                name={ScreenNames.AnimationScreens}
+                component={AminationScreens}
+              />
+              <Stack.Screen
+                name={ScreenNames.AnimatedProfileScreen}
+                component={AnimatedProfileScreen}
+              />
+            </Stack.Navigator>
+          </NavigationContainer>
+        </View>
+      </GestureHandlerRootView>
     </Provider>
     // </RTLProvider>
   );

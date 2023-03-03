@@ -46,6 +46,36 @@ export const categories = [
     items: '210',
     image: require('../images/categories/cabbage.png'),
   },
+  {
+    id: 1,
+    name: 'Fruit',
+    items: '1126',
+    image: require('../images/categories/lemon.png'),
+  },
+  {
+    id: 2,
+    name: 'Chicken',
+    items: '142',
+    image: require('../images/categories/chicken.png'),
+  },
+  {
+    id: 3,
+    name: 'Fresh Fish',
+    items: '50',
+    image: require('../images/categories/fish.png'),
+  },
+  {
+    id: 4,
+    name: 'Dairy',
+    items: '98',
+    image: require('../images/categories/cake.png'),
+  },
+  {
+    id: 5,
+    name: 'Vegetable',
+    items: '210',
+    image: require('../images/categories/cabbage.png'),
+  },
 ];
 
 export const popularDeals = [

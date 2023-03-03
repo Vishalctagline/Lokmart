@@ -17,21 +17,23 @@ import { ScreenNames } from '../navigation/ScreenNames';
 import CustomHeader from '../components/CustomHeader';
 
 
-const CotegoryCard = ({item, index, onPress = () => {}}) => (
+export const CotegoryCard = ({item, index, onPress = () => {}}) => (
   <TouchableWithoutFeedback onPress={onPress}>
     <View
       style={{
+        // flex:1,
         flexDirection: 'row',
-        borderColor: colors.grey1,
+        borderColor: colors.grey,
         borderWidth: 1,
         borderRadius: 20,
         height: 100,
         // width: 100,
         alignItems: 'center',
         // justifyContent: 'center',
-        marginHorizontal: 20,
-        marginVertical: 10,
+        // marginHorizontal: 20,
+        // marginVertical: 10,
         padding: 10,
+        backgroundColor: colors.white,
       }}>
       <Image
         source={item.image}

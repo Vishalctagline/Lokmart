@@ -24,4 +24,5 @@ export const ScreenNames = {
 
   //AnimationScreen
   AnimationScreens: 'AnimationScreens',
+  AnimatedProfileScreen:'AnimatedProfileScreen'
 };
