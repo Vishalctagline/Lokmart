@@ -17,7 +17,7 @@
 
 #import <React/RCTI18nUtil.h>
 
-#import <GoogleMaps/GoogleMaps.h>
+//#import <GoogleMaps/GoogleMaps.h>
 
 
 
@@ -89,7 +89,7 @@ didReceiveNotificationResponse:(UNNotificationResponse *)response
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
   
-  [GMSServices provideAPIKey:@"AIzaSyCM5c9xL4o4KENma2knCl7bbASgss0j01c"];
+//  [GMSServices provideAPIKey:@"AIzaSyCM5c9xL4o4KENma2knCl7bbASgss0j01c"];
 
 
   

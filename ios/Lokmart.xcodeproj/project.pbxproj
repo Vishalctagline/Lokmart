@@ -25,9 +25,6 @@
 		044A3BD329470B020055FF30 /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 044A3BC329470B020055FF30 /* EvilIcons.ttf */; };
 		044A3BD429470B020055FF30 /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 044A3BC429470B020055FF30 /* SimpleLineIcons.ttf */; };
 		044A3BD529470B020055FF30 /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 044A3BC529470B020055FF30 /* MaterialIcons.ttf */; };
-		04770CD529AF57270072B51E /* GoogleMaps.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04BE2A9129ADF6EB005E0844 /* GoogleMaps.xcframework */; };
-		04770CD629AF57270072B51E /* GoogleMapsBase.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04BE2A9329ADF6EB005E0844 /* GoogleMapsBase.xcframework */; };
-		04770CD729AF57270072B51E /* GoogleMapsCore.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04BE2A9529ADF6EB005E0844 /* GoogleMapsCore.xcframework */; };
 		04AE947229770AAA0057EBB7 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04AE947129770AAA0057EBB7 /* Bolts.framework */; };
 		04AE947429770ABE0057EBB7 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04AE947329770ABD0057EBB7 /* FBSDKCoreKit.framework */; };
 		04AE947629770ACD0057EBB7 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04AE947529770ACD0057EBB7 /* FBSDKLoginKit.framework */; };
@@ -151,9 +148,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				04770CD529AF57270072B51E /* GoogleMaps.xcframework in Frameworks */,
-				04770CD629AF57270072B51E /* GoogleMapsBase.xcframework in Frameworks */,
-				04770CD729AF57270072B51E /* GoogleMapsCore.xcframework in Frameworks */,
 				65630CD8181071950BBA1D55 /* Pods_Lokmart.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -317,7 +311,7 @@
 				00E356EB1AD99517003FC87E /* Frameworks */,
 				00E356EC1AD99517003FC87E /* Resources */,
 				46ECEFF280F742EC0CE30284 /* [CP] Embed Pods Frameworks */,
-				6EDC2AF801308D851D802F36 /* [CP] Copy Pods Resources */,
+				64A815419F8AE054FB9482CE /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -341,7 +335,7 @@
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
 				30CC99539CFF1C493FF779A7 /* [CP] Embed Pods Frameworks */,
 				EB43B6E01DF15D6A0D2644B2 /* [CP-User] [RNFB] Core Configuration */,
-				B6CBCB0E4FCEBE1BFB3CA870 /* [CP] Copy Pods Resources */,
+				ABE05792D3A6BC42AF6A7C07 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -497,7 +491,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Lokmart-LokmartTests/Pods-Lokmart-LokmartTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		6EDC2AF801308D851D802F36 /* [CP] Copy Pods Resources */ = {
+		64A815419F8AE054FB9482CE /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -558,7 +552,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		B6CBCB0E4FCEBE1BFB3CA870 /* [CP] Copy Pods Resources */ = {
+		ABE05792D3A6BC42AF6A7C07 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
